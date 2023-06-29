@@ -22,9 +22,11 @@ function ProductPage() {
     const colors = tokens(theme.palette.mode);
 
 const dispatch = useDispatch()
-// dispatch(listProducts())
+// 
 
-
+useEffect(() => {
+    dispatch(listProducts())
+}, [])
 // console.log('heyyy this is me')
 
   return (
@@ -66,8 +68,8 @@ const dispatch = useDispatch()
                                         {/* </div> */}
                                         
                                         <td>{products.category}</td>
-                                        <td>{products.itemsInStock}</td>
-                                        <td>{products.unitPrice}</td>
+                                        <td>{products.quantity}</td>
+                                        <td>{products.price}</td>
 
 
                                         {/* <td>{user.isAdmin ? (

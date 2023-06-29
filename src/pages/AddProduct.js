@@ -7,7 +7,7 @@ import { useState } from "react";
 import Papa from "papaparse";
 import { addProduct } from '../Redux/actions/productActions';
 import { useDispatch, useSelector } from 'react-redux'
-
+import './AddProduct.css'
 
 
 
@@ -50,56 +50,20 @@ dispatch(addProduct(formData))
 
   return (
     <div>
-       {/* File Uploader */}
+      <label class='choose-file-container'>
       <input
         type="file"
-        // name="file"
         onChange={changeHandler}
-        // accept=".csv"
-        style={{ display: "block", margin: "10px auto" }}
+        style={{  }}
       />
+      <span className='choose-file-button'>Choose file</span>
+      </label>
       <br />
-      <Button variant='light' className=''  style={{ display: "block", marginLeft: "670px", borderRadius: '6px' }} onClick={
-            handleOnSubmit
-          }>
-                                                    
-                                                    UPLOAD CSV
-                                                </Button>
-      {/* <button
-          onClick={
-            handleOnSubmit
-          }
-        >
-          IMPORT CSV
-        </button> */}
-      <br />
-      {/* Table */}
-      {/* <table>
-        <thead>
-          <tr>
-            {tableRows.map((rows, index) => {
-              return <th key={index}>{rows}</th>;
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {values.map((value, index) => {
-            return (
-              <tr key={index}>
-                {value.map((val, i) => {
-                  return <td key={i}>{val}</td>;
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-
-      {parsedData.map((data, index) => (
-  <div key={index}>
-    <p>{JSON.stringify(data)}</p>
-  </div>
-))} */}
+      <Button variant='light' className=''  style={{ display: "block", marginLeft: "670px", borderRadius: '6px' }} 
+      onClick={ handleOnSubmit }>
+         UPLOAD CSV
+       </Button>
+     
 
 
     </div>

@@ -4,14 +4,33 @@ import { Table, Button, Card } from 'react-bootstrap'
 import ProductTest from '../ProductTest'
 import { tokens } from '../theme'
 import { Typography, Box, useTheme } from "@mui/material";
+import { useDispatch, useSelector } from 'react-redux'
+import { getProductByName } from '../Redux/actions/productActions'
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+
 
 function ProductDetailsPage() {
 
-    const product = ProductTest
+    // const product = ProductTest
+    // console.log(match.params.name)
+const { name } = useParams()
+console.log(name)
 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
+    const dispatch = useDispatch()
+
+    const newproduct = useSelector(state => state.productDetails)
+    const {products} = newproduct
+console.log("from the store products" + newproduct)
+
+    useEffect(() => {
+        dispatch(getProductByName(name))
+    }, [])
+
+    // console.log("this is product" + product)
 
 
   return (
@@ -34,28 +53,29 @@ function ProductDetailsPage() {
                                     <th>NAME</th>
                                     {/* <th>PHOTO</th> */}
                                     <th>CATEGORY</th>
-                                    <th>ITEMS IN STOCK</th>
                                     <th>UNIT PRICE</th>
-                                    <th>RFID</th>
+                                    {/* <th>RFID</th> */}
                                 </tr>
                             </thead>
 
                             <tbody>
-                                {product.map(product => (
+                                {products.map(product => (
                                     <tr key={product.name}>
-                                        <td>{product._id}</td>
+                                        <td>{product.product_id}</td>
                                         <td>{product.name}</td>
                                         <td>{product.category}</td>
-                                        <td>{product.itemsInStock}</td>
-                                        <td>{product.unitPrice}</td>
-                                        <td>{product.rfid}</td>
+                                        <td>{product.price}</td>
+                                        {/* <td>{product.price}</td>
+                                        <td>{product.rfid}</td> */}
                                         <td>
-                                            <LinkContainer to={`/products/${product.name}/edit`}>
+                                            {/* <LinkContainer to={`/products/${product.name}/edit`}>
                                                 <Button variant='light' className='btn-sm'>
-                                                    {/* <i className='fas fa-edit'></i> */}
+                                                    
                                                     edit RFID
                                                 </Button>
-                                                </LinkContainer>
+                                                </LinkContainer> */}
+
+                                                
 {/* 
                                             <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(user._id)}>
                                                 <i className='fas fa-trash'></i>
