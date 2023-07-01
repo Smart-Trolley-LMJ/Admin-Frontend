@@ -3,11 +3,17 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button, Card, Image } from 'react-bootstrap'
 import ProductTest from '../ProductTest'
 import { tokens } from '../theme'
-import { Typography, Box, useTheme } from "@mui/material";
+import { Typography, Box, useTheme, IconButton } from "@mui/material";
 import './ProductPage.css'
 import cosmetics from '../images/cosmetics.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from '../Redux/actions/productActions'
+import SearchIcon from "@mui/icons-material/Search";
+import InputBase from "@mui/material/InputBase";
+
+
+// import InputBase from '@mui/material'
+// import Search
 
 
 
@@ -35,12 +41,22 @@ useEffect(() => {
         variant="h2"
         color={colors.grey[100]}
         fontWeight="bold"
-        sx={{ m: "0 0 5px 0" }}
+        sx={{ m: "0 0 5px 0",  textAlign: "center",marginBottom: '20px' }}
       >
-        Products
+        ALL PRODUCTS IN THE STORE
       </Typography>
  <div>
-            
+ <Box
+        display="flex"
+        backgroundColor={colors.primary[400]}
+        borderRadius="3px"
+        style={{ width: '300px'}}
+      >
+        <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
+        <IconButton type="button" sx={{ p: 1 }}>
+          <SearchIcon />
+        </IconButton>
+      </Box>
                         <Table striped bordered hover responsive className='table-sm text-success' >
                             <thead>
                                 <tr>
@@ -80,10 +96,10 @@ useEffect(() => {
 
                                         <td>
                                             <LinkContainer to={`/products/${product.name}/edit`}>
-                                                <Button variant='light' className='btn-sm'>
+                                                <button className='edit-button'>
                                                     {/* <i className='fas fa-edit'></i> */}
                                                     edit
-                                                </Button>
+                                                </button>
                                                 </LinkContainer>
 {/* 
                                             <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(user._id)}>

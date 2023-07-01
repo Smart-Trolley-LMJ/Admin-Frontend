@@ -1,6 +1,7 @@
 import { PRODUCT_UPDATE_SUCCESS, 
     PRODUCT_UPDATE_REQUEST,
      PRODUCT_UPDATE_FAIL,
+     PRODUCT_CLEAR_UPDATE_STATE,
     
      PRODUCT_LIST_REQUEST,
     PRODUCT_LIST_SUCCESS,
@@ -16,10 +17,13 @@ export const addProductReducer = (state = {}, action) => {
             return { loading: true }
 
         case PRODUCT_UPDATE_SUCCESS:
-                return { loading: false }
+                return { loading: false, serverMsg: action.payload }
     
             case PRODUCT_UPDATE_FAIL:
                 return { loading: false, error: action.payload }
+
+            case PRODUCT_CLEAR_UPDATE_STATE:
+                    return { loading: false, serverMsg: action.payload}
     
             default:
                 return state

@@ -17,24 +17,19 @@ function Header() {
 
     return (
         <>
-            <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+            <div className='nav'>
                 <Container>
+                    <div className='divy'>
                     <LinkContainer to='/'>
-                        <Navbar.Brand className='navy fs-80'>
-                           
+                        {/* <Navbar.Brand className='navy fs-80'> */}
+                           <div className='name-shop'>
                             SMART TROLLEY SHOP 
-                                </Navbar.Brand>
+                            </div>
+                                {/* </Navbar.Brand> */}
                     </LinkContainer>
 
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        {/* <SearchBox /> */}
-                        <Nav className="ml-auto">
-                
-                    
-
                             {userInfo ? (
-                                            <Button variant='primary' className='mt-3' onClick={logoutHandler}>Logout</Button>
+                                            <button className='logout-button' onClick={logoutHandler}>Logout</button>
 
 
                             ) : (
@@ -60,10 +55,10 @@ function Header() {
                             )} */}
 
 
-                        </Nav>
-                    </Navbar.Collapse>
+                      
+                    </div>
                 </Container>
-            </Navbar>
+            </div>
         </>
     )
 }

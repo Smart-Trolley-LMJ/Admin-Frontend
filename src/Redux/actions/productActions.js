@@ -1,6 +1,7 @@
 import { PRODUCT_UPDATE_FAIL,
      PRODUCT_UPDATE_REQUEST,
     PRODUCT_UPDATE_SUCCESS,
+    PRODUCT_CLEAR_UPDATE_STATE,
 
     PRODUCT_LIST_REQUEST,
     PRODUCT_LIST_SUCCESS,
@@ -10,7 +11,8 @@ import { PRODUCT_UPDATE_FAIL,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,} from "../constants/productConstants";
 import axios from "axios";
-
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 
 export const addProduct = (csvfile) => async (dispatch) => {
@@ -32,25 +34,23 @@ export const addProduct = (csvfile) => async (dispatch) => {
             csvfile,
             config,
             )
-            console.log('okay okay jejeosodlmfmdkm;sakdmkddf')
+            // console.log('okay okay jejeosodlmfmdkm;sakdmkddf')
+
 
         dispatch({
-            PRODUCT_UPDATE_SUCCESS,
+            type: PRODUCT_UPDATE_SUCCESS,
             payload: data
         })
 
-
+        
     }
+   
     catch (error) {
-        if (error.response) {
-            // console.log(data.ms)
-            console.log(error.response.data); // Response data from the server
-            console.log(error.response.data.detail); // Status code of the response
-            // console.log(error.response.headers); // Response headers
-          } else if (error.request) {
-            // The request was made but no response was received
-            console.log(error.request); // The XMLHttpRequest object used for the request
-          } 
+        // console.log(error.response && error.response.data.detail)
+        // console.log(error.response.data.msg)
+        // console.log(error.message)
+        // const gog = error.response.data.msg
+        // console.log("try this olau" + gog)
         dispatch({
             type: PRODUCT_UPDATE_FAIL,
             payload: error.response && error.response.data.detail
@@ -60,6 +60,17 @@ export const addProduct = (csvfile) => async (dispatch) => {
 
     }
 
+}
+
+export const clearupdate = () => (dispatch) => {
+    try{
+       const data = null
+        dispatch({
+            type: PRODUCT_CLEAR_UPDATE_STATE,
+            payload: data
+        })
+    }
+    catch{}
 }
 
 export const listProducts = () => async (dispatch) => {

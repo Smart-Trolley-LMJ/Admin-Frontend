@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormContainer from '../components/loginComponents/FormContainer'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import { Typography, Box, useTheme } from "@mui/material";
@@ -8,6 +8,11 @@ import Papa from "papaparse";
 import { addProduct } from '../Redux/actions/productActions';
 import { useDispatch, useSelector } from 'react-redux'
 import './AddProduct.css'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import { clearupdate } from '../Redux/actions/productActions';
+
+
 
 
 
@@ -15,32 +20,36 @@ function AddProduct() {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
-    const [parsedData, setParsedData] = useState([]);
-
-    //State to store table Column name
-    const [tableRows, setTableRows] = useState([]);
-  
-    //State to store the values
-    const [values, setValues] = useState([]);
+ 
 
     const [csvfile, setCsvFile] = useState(null);
+
+    const addProductInfo = useSelector(state => state.addProduct)
+    const {error, loading, serverMsg} = addProductInfo
+
+
+if(serverMsg) {
+  console.log('helloooooowepoew')
+}
+const pop = serverMsg
+console.log( "hey ther pop " + JSON.stringify(pop))
+
+
+
 
     const dispatch = useDispatch()
   
     const changeHandler = (e) => {
       setCsvFile(e.target.files[0])
-    // }
-    // console.log( 'loloo ' + e.target.files[0])
+
     }
 
       const handleOnSubmit = (event) => {
         event.preventDefault();
 
-      // const file = e.target.files[0];
-      // console.log( 'loloo ' + e.target.files[0])
+ 
     const formData = new FormData();
     formData.append('file', csvfile);
-// console.log("this is the event" + formData)
 
 
 dispatch(addProduct(formData))
@@ -48,8 +57,25 @@ dispatch(addProduct(formData))
 
     };
 
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        dispatch(clearupdate()) 
+    },5000)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [pop, error])
+
   return (
     <div>
+      <div className='message-loader'>
+      {pop ? 
+        <Message variant='success'>{pop.msg}</Message> :
+       error ? <Message variant='danger'>{error}</Message> :
+            loading && <Loader />}
+            </div>
+            <div className='div-div'>
       <label class='choose-file-container'>
       <input
         type="file"
@@ -59,13 +85,15 @@ dispatch(addProduct(formData))
       <span className='choose-file-button'>Choose file</span>
       </label>
       <br />
-      <Button variant='light' className=''  style={{ display: "block", marginLeft: "670px", borderRadius: '6px' }} 
+      {csvfile ? <button variant='light' className='upload-button'  style={{ display: "block", marginLeft: "675px",   }} 
       onClick={ handleOnSubmit }>
          UPLOAD CSV
-       </Button>
+       </button> : null
+      
+}
      
 
-
+       </div>
     </div>
   )
 }

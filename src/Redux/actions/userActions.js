@@ -17,7 +17,7 @@ export const login = (email, password) => async (dispatch) => {
 
         const obj = { 'username': email, 'password': password }
         const myJson = JSON.stringify(obj)
-console.log('this is my ' + myJson)
+// console.log('this is my ' + myJson)
         const config = {
             headers: {
                 'Content-type': 'application/json'
@@ -36,24 +36,17 @@ console.log('this is my ' + myJson)
             type: USER_LOGIN_SUCCESS,
             payload: data
         })
-        // .then(response => {
-        //     console.log(response.data)
-        //     console.log('okay okay ' + data)
-
-        // })
+    
         console.log('okay okay ' + data.msg)
         localStorage.setItem('userInfo', JSON.stringify(data))
 
     } catch (error) {
-        if (error.response) {
-            // The request was made and the server responded with a status code
-            console.log(error.response.data); // Response data from the server
-            console.log(error.response.data.detail); // Status code of the response
-            console.log(error.response.headers); // Response headers
-          } else if (error.request) {
-            // The request was made but no response was received
-            console.log(error.request); // The XMLHttpRequest object used for the request
-          } 
+        dispatch({ 
+            type: USER_LOGIN_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                :error.message,
+        })
     }
 
   

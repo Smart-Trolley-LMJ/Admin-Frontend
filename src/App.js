@@ -23,6 +23,7 @@ import ProductDetailsPage from "./pages/ProductDetailsPage";
 import CartTransactions from "./pages/CartTransactions";
 import ProductEdit from "./pages/ProductEdit";
 import { useSelector } from "react-redux";
+import './App.css'
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -56,8 +57,11 @@ function App() {
           <Sidebar isSidebar={isSidebar} />
           <main className="content">
             <Topbar setIsSidebar={setIsSidebar} />
+            <div className="div-padding">
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              
+              {/* <Route path="/" element={<Dashboard />} /> */}
+              <Route path="/" element={<ProductPage />} />
               <Route path="/products" element={<ProductPage />} />
               <Route path="/addproduct" element={<AddProduct />} />
 
@@ -77,9 +81,10 @@ function App() {
               <Route path="/products/:name/details" element={<ProductDetailsPage />} />
               <Route path="/carttransactions" element={<CartTransactions />} />
               <Route path="/login" element={<LoginPage />} />
-
+             
 
             </Routes>
+            </div>
           </main>
         </div>
       </ThemeProvider>

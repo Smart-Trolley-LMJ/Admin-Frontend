@@ -1,8 +1,29 @@
-.navy {
-    font-size: 190px;
-    /* margin-left: 190px; */
-    /* margin-right: 90px; */
-    align-items: center;
-    padding-left: 410px;
+.nav {
+height: 100px;
+background-color: #1F2A40;
+box-shadow: 894px;
+}
 
+.name-shop {
+    font-size: 50px;
+    padding-left: 250px;
+    font-weight: bolder;
+}
+
+.divy {
+    padding-top: 15px;
+    display: flex;
+}
+
+.logout-button {
+    height: 50px;
+    width: 80px;
+    border-radius: 20px;
+    margin-left: 200px;
+    margin-top: 15px;
+    border: none
+}
+
+.logout-button:hover {
+    background-color: #4d5461;
 }

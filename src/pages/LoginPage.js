@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-// import Loader from '../components/Loader'
-// import Message from '../components/Message'
 import FormContainer from '../components/loginComponents/FormContainer'
-// import { login } from '../actions/userActions'
 import Header from '../components/Header'
 import { login } from '../Redux/actions/userActions'
 import Dashboard from '../scenes/dashboard'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+
 
 function LoginPage({ location, history, handleLogin }) {
     const [email, setEmail] = useState('')
@@ -20,14 +20,16 @@ function LoginPage({ location, history, handleLogin }) {
     // const redirect = location.search ? location.search.split('=')[1] : '/'
     
     const userLogin = useSelector(state => state.userLogin)
-    const { loading, userInfo } = userLogin
+    const { error, loading, userInfo } = userLogin
 
-
-    useEffect(() => {
-        if (userInfo) {
-            history.push('/products')
-        }
-    }, [history, userInfo])
+// const helll = userInfo.map(item =>  item.use)
+// console.log("yeayyyyyyyy this ist it " + helll)
+    // useEffect(() => {
+    //     if (userInfo) {
+    //         history.push('/products')
+    //         console.log("hello gous")
+    //     }
+    // }, [history, userInfo])
 
     // const dispatch = useDispatch()
 
@@ -63,9 +65,11 @@ function LoginPage({ location, history, handleLogin }) {
             <Header />
         <FormContainer>
             <h1 style={{ marginTop: '30px'}}>Sign In</h1>
-            {/* {error && <Message variant='danger'>{error}</Message>}
-            {loading && <Loader />} */}
-            <Form onSubmit={submitHandler}>
+            <div style={{ position: 'relative', marginBottom: '60px', marginTop: '20px', height: '80px'}}>
+            {error && <Message variant='danger'>{error}</Message>}
+            {loading && <Loader />}
+            </div>
+            <Form onSubmit={submitHandler} style={{ position: 'absolute', width: '540px'}}>
 
                 <Form.Group controlId='username'>
                     <Form.Label>Username</Form.Label>
