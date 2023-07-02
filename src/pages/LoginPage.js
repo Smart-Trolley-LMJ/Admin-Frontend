@@ -47,7 +47,7 @@ function LoginPage({ location, history, handleLogin }) {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        dispatch(login(email, password))
+        dispatch(login(email, password))        
         // dispatch(login(email, password))
         // if (username === 'admin' && password === 'password') {
         //     handleLogin();
@@ -64,7 +64,7 @@ function LoginPage({ location, history, handleLogin }) {
         <div>
             <Header />
         <FormContainer>
-            <h1 style={{ marginTop: '30px'}}>Sign In</h1>
+            <h1 style={{ marginTop: '30px', marginLeft: '205px'}}>Sign In</h1>
             <div style={{ position: 'relative', marginBottom: '60px', marginTop: '20px', height: '80px'}}>
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader />}

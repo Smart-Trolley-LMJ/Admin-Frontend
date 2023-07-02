@@ -1,120 +1,220 @@
-import React, { useEffect } from 'react'
-import { LinkContainer } from 'react-router-bootstrap'
-import { Table, Button, Card, Image } from 'react-bootstrap'
-import ProductTest from '../ProductTest'
-import { tokens } from '../theme'
+import React, { useEffect, useState } from "react";
+import { LinkContainer } from "react-router-bootstrap";
+import { Table, Button, Card, Image } from "react-bootstrap";
+import ProductTest from "../ProductTest";
+import { tokens } from "../theme";
 import { Typography, Box, useTheme, IconButton } from "@mui/material";
-import './ProductPage.css'
-import cosmetics from '../images/cosmetics.png'
-import { useDispatch, useSelector } from 'react-redux'
-import { listProducts } from '../Redux/actions/productActions'
+import "./ProductPage.css";
+import cosmetics from "../images/cosmetics.png";
+import { useDispatch, useSelector } from "react-redux";
+import { listProducts } from "../Redux/actions/productActions";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
-
+import Message from "../components/Message";
+import Loader from "../components/Loader";
 
 // import InputBase from '@mui/material'
 // import Search
 
-
-
 function ProductPage() {
+  const { products, error, loading } = useSelector((state) => state.productList);
+  // const product = ProductTest
 
-    const product = useSelector(state => state.productList)
-    // const product = ProductTest
-    const {products} = product
-    // const userLogin = useSelector(state => state.userLogin)
+  const [edit, setEdit] = useState(true);
+  // const userLogin = useSelector(state => state.userLogin)
 
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
-const dispatch = useDispatch()
-// 
+  const dispatch = useDispatch();
+  //
 
-useEffect(() => {
-    dispatch(listProducts())
-}, [])
-// console.log('heyyy this is me')
+  useEffect(() => {
+    dispatch(listProducts());
+  }, []);
+  // console.log("heyyy this is me " + [product.name]);
+
+ 
+
+  const [editing, setEditing] = useState({});
+
+  // Function to handle the edit button click
+  const editClickHandler = (product) => {
+    setEditing((prevState) => ({
+      ...prevState,
+      [product.name]: true,
+    }));
+  };
+
+  // Function to handle changes in the input fields
+  const handleChange = (e, product) => {
+    const { name, value } = e.target;
+    setEditing((prevState) => ({
+      ...prevState,
+      [product.name]: {
+        ...prevState[product.name],
+        [name]: value,
+      },
+    }));
+  };
+
+  // Function to handle the submit button click
+  const handleSubmit = (product) => {
+    // dispatch(editProduct(product.name, editing[product.name]));
+    setEditing((prevState) => ({
+      ...prevState,
+      [product.name]: undefined,
+    }));
+  };
 
   return (
     <div>
-         <Typography
+      <Typography
         variant="h2"
         color={colors.grey[100]}
         fontWeight="bold"
-        sx={{ m: "0 0 5px 0",  textAlign: "center",marginBottom: '20px' }}
+        sx={{ m: "0 0 5px 0", textAlign: "center", marginBottom: "20px" }}
       >
         ALL PRODUCTS IN THE STORE
       </Typography>
- <div>
- <Box
-        display="flex"
-        backgroundColor={colors.primary[400]}
-        borderRadius="3px"
-        style={{ width: '300px'}}
-      >
-        <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
-        <IconButton type="button" sx={{ p: 1 }}>
-          <SearchIcon />
-        </IconButton>
-      </Box>
-                        <Table striped bordered hover responsive className='table-sm text-success' >
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>NAME</th>
-                                    <th>PHOTO</th>
-                                    <th>CATEGORY</th>
-                                    <th>ITEMS IN STOCK</th>
-                                    <th>UNIT PRICE</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
+      <div>
+        <Box
+          display="flex"
+          backgroundColor={colors.primary[400]}
+          borderRadius="3px"
+          style={{ width: "300px" }}
+        >
+          <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
+          <IconButton type="button" sx={{ p: 1 }}>
+            <SearchIcon />
+          </IconButton>
+        </Box>
+        <Table
+          striped
+          bordered
+          hover
+          responsive
+          className="table-sm text-success"
+        >
+          <thead>
+            <tr>
+              {/* <th>ID</th> */}
+              <th>NAME</th>
+              <th>PHOTO</th>
+              <th>CATEGORY</th>
+              <th>ITEMS IN STOCK</th>
+              <th>UNIT PRICE</th>
+              <th></th>
+            </tr>
+          </thead>
 
-                            <tbody>
-                                {products.map(products => (
+          <tbody>
+            <div className="message-product">
+          {error && <Message variant='danger'>{error}</Message>}
+          {loading && <Loader />}
 
-<LinkContainer to={`/products/${products.name}/details`}>
-
-                                    <tr key={products.name}>
-                                        <td>{products._id}</td>
-                                        <td>{products.name}</td>
-                                        {/* <td><Card.Img src={favicon} className="products-image" /></td> */}
-                                        {/* <div className="products-image-container"> */}
-                                        <td><Image src={cosmetics}  style={{ width: '30px', height: '30px' }} /></td>
-                                        {/* </div> */}
-                                        
-                                        <td>{products.category}</td>
-                                        <td>{products.quantity}</td>
-                                        <td>{products.price}</td>
-
-
-                                        {/* <td>{user.isAdmin ? (
-                                            <i className='fas fa-check' style={{ color: 'green' }}></i>
-                                        ) : (
-                                                <i className='fas fa-check' style={{ color: 'red' }}></i>
-                                            )}</td> */}
-
-                                        <td>
-                                            <LinkContainer to={`/products/${product.name}/edit`}>
-                                                <button className='edit-button'>
-                                                    {/* <i className='fas fa-edit'></i> */}
-                                                    edit
-                                                </button>
-                                                </LinkContainer>
-{/* 
-                                            <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(user._id)}>
-                                                <i className='fas fa-trash'></i>
-                                            </Button> */}
-                                        </td>
-                                    </tr>
-                                    </LinkContainer>
-
-                                ))}
-                            </tbody>
-                        </Table>
-                    
-        </div>    </div>
-  )
+          </div>
+            {products.map((product) => (
+              <tr key={product.name}>
+                <td>
+                  {editing[product.name] ? (
+                    <input
+                      type="text"
+                      name="name"
+                      value={editing[product.name]?.name || product.name}
+                      onChange={(e) => handleChange(e, product)}
+                    />
+                  ) : (
+                    <LinkContainer  to={`/products/${product.name}/details`}>
+                      <span className="span-caret">{product.name}</span>
+                    </LinkContainer>
+                  )}
+                </td>
+                <td>
+                  {editing[product.name] ? (
+                    <input
+                      type="text"
+                      name="photo"
+                      value={
+                        editing[product.name]?.photo || product.photo 
+                      }
+                      onChange={(e) => handleChange(e, product)}
+                    />
+                  ) : (
+                    <LinkContainer to={`/products/${product.name}/details`}>
+                      <span className="span-caret">{product.photo}</span>
+                    </LinkContainer>
+                  )}
+                </td>
+                <td>
+                  {editing[product.name] ? (
+                    <input
+                      type="text"
+                      name="category"
+                      value={
+                        editing[product.name]?.category || product.category
+                      }
+                      onChange={(e) => handleChange(e, product)}
+                    />
+                  ) : (
+                    <LinkContainer to={`/products/${product.name}/details`}>
+                      <span className="span-caret">{product.category}</span>
+                    </LinkContainer>
+                  )}
+                </td>
+                <td>
+                  {editing[product.name] ? (
+                    <input
+                      type="text"
+                      name="quantity"
+                      value={
+                        editing[product.name]?.quantity || product.quantity
+                      }
+                      onChange={(e) => handleChange(e, product)}
+                    />
+                  ) : (
+                    <LinkContainer to={`/products/${product.name}/details`}>
+                      <span className="span-caret">{product.quantity}</span>
+                    </LinkContainer>
+                  )}
+                </td>
+                <td>
+                  {editing[product.name] ? (
+                    <input
+                      type="text"
+                      name="price"
+                      value={
+                        editing[product.name]?.price || product.price
+                      }
+                      onChange={(e) => handleChange(e, product)}
+                    />
+                  ) : (
+                    <LinkContainer to={`/products/${product.name}/details`}>
+                      <span className="span-caret">{product.price}</span>
+                    </LinkContainer>
+                  )}
+                </td>
+                
+              
+                <td>
+                  {editing[product.name] ? (
+                    <button className="edit-button" onClick={() => handleSubmit(product)}>Save</button>
+                  ) : (
+                    <button
+                      className="edit-button"
+                      onClick={() => editClickHandler(product)}
+                    >
+                      Edit
+                    </button>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>{" "}
+    </div>
+  );
 }
 
-export default ProductPage
+export default ProductPage;

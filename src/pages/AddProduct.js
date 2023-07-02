@@ -69,6 +69,7 @@ dispatch(addProduct(formData))
 
   return (
     <div>
+
       <div className='message-loader'>
       {pop ? 
         <Message variant='success'>{pop.msg}</Message> :
@@ -76,6 +77,8 @@ dispatch(addProduct(formData))
             loading && <Loader />}
             </div>
             <div className='div-div'>
+            <div className='info'>CLICK CHOOSE FILE TO ADD CSV FILE</div>
+
       <label class='choose-file-container'>
       <input
         type="file"

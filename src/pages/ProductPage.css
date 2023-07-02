@@ -15,3 +15,16 @@
     border: none;
   }
 
+  .edit-button:hover {
+    background-color: grey;
+  }
+
+  .message-product {
+    padding-left: 500px;
+    position: absolute;
+  }
+  
+  .span-caret {
+    cursor: pointer;
+  }
+
