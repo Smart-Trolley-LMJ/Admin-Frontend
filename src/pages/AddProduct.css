@@ -1,3 +1,32 @@
+.form-side-div{
+    text-align: center;
+}
+
+.input-div{
+    margin-bottom: 40px;
+}
+
+.input-field{
+    width: 25%;
+    height: 53px;
+    /* border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px; */
+    border: none;
+    text-indent: 10px;
+    font-size: 16px;
+    text-align: center;
+
+}
+
+.input-field::placeholder {
+    text-align: center;
+}
+
+
+.csv-side-div{
+    margin-top: 290px;
+}
+
 .choose-file-container {
     /* position: absolute; */
     /* margin-top: 35px;
@@ -6,6 +35,14 @@ margin-left: 685px;
     display: flex;
     align-items: center;
     cursor: pointer;
+  }
+
+  .choose-image-container{
+    margin-left: 685px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 90px;
   }
 
 

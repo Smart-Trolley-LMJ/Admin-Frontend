@@ -14,8 +14,8 @@ function ProductDetailsPage() {
 
     // const product = ProductTest
     // console.log(match.params.name)
-const { name } = useParams()
-console.log(name)
+const { id } = useParams()
+console.log(id)
 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -27,7 +27,7 @@ console.log(name)
 console.log("from the store products" + newproduct)
 
     useEffect(() => {
-        dispatch(getProductByName(name))
+        dispatch(getProductByName(id))
     }, [])
 
     // console.log("this is product" + product)

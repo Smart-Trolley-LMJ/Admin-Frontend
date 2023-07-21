@@ -1,4 +1,10 @@
-import { PRODUCT_UPDATE_FAIL,
+import { 
+    PRODUCT_FORM_SUBMIT_FAIL,
+     PRODUCT_FORM_SUBMIT_REQUEST,
+    PRODUCT_FORM_SUBMIT_SUCCESS,
+    PRODUCT_CLEAR_FORM_SUBMIT_STATE,
+    
+    PRODUCT_UPDATE_FAIL,
      PRODUCT_UPDATE_REQUEST,
     PRODUCT_UPDATE_SUCCESS,
     PRODUCT_CLEAR_UPDATE_STATE,
@@ -15,6 +21,50 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 
+
+export const formAddProduct = (transformedForm) => async (dispatch, getState) => {
+try{
+    dispatch({ type: PRODUCT_FORM_SUBMIT_REQUEST})
+    
+    // console.log(' ' + transformedForm)
+
+    const {
+        userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+        headers: {
+            'Content-type': 'application/json',
+            Authorization: `${userInfo.token}`
+        }
+    }
+
+    const { data } = await axios.post(
+        `https://smtrolley.onrender.com/inventories`,
+        transformedForm,
+        config,
+    )
+
+    dispatch({
+        type: PRODUCT_FORM_SUBMIT_SUCCESS,
+        payload: data
+
+    })
+}
+
+    catch (error) {
+        dispatch({
+            type: PRODUCT_FORM_SUBMIT_FAIL,
+            payload: error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+        })
+    }
+
+
+}
+
+
 export const addProduct = (csvfile) => async (dispatch) => {
     try{
         dispatch({ type: PRODUCT_UPDATE_REQUEST})
@@ -26,11 +76,13 @@ export const addProduct = (csvfile) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-type': 'multipart/form-data'
+                // Authorization: `Bearer ${userInfo.token}`
+
             }
         }
 
         const { data } = await axios.post(
-            `https://smtrolley.onrender.com/inventory/stock`,
+            `https://smtrolley.onrender.com/inventories/bulk`,
             csvfile,
             config,
             )
@@ -46,11 +98,7 @@ export const addProduct = (csvfile) => async (dispatch) => {
     }
    
     catch (error) {
-        // console.log(error.response && error.response.data.detail)
-        // console.log(error.response.data.msg)
-        // console.log(error.message)
-        // const gog = error.response.data.msg
-        // console.log("try this olau" + gog)
+      
         dispatch({
             type: PRODUCT_UPDATE_FAIL,
             payload: error.response && error.response.data.detail
@@ -77,7 +125,7 @@ export const listProducts = () => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_LIST_REQUEST })
 
-        const { data } = await axios.get(`https://smtrolley.onrender.com/inventory/get-all`)
+        const { data } = await axios.get(`https://smtrolley.onrender.com/inventories`)
 
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
@@ -95,11 +143,11 @@ export const listProducts = () => async (dispatch) => {
     }
 }
 
-export const getProductByName = (name) => async (dispatch) => {
+export const getProductByName = (id) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
 
-        const { data } = await axios.get(`https://smtrolley.onrender.com/inventory/get-product-by-name/${name}`)
+        const { data } = await axios.get(`https://smtrolley.onrender.com/inventory/get-product-by-name/${id}`)
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,

@@ -46,7 +46,7 @@ function App() {
     return <LoginPage />;
   }
 
-
+console.log('this is theme ' +  colorMode)
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -60,13 +60,9 @@ function App() {
             <div className="div-padding">
             <Routes>
               
-              {/* <Route path="/" element={<Dashboard />} /> */}
               <Route path="/" element={<ProductPage />} />
               <Route path="/products" element={<ProductPage />} />
               <Route path="/addproduct" element={<AddProduct />} />
-
-
-
               <Route path="/invoices" element={<Invoices />} />
               <Route path="/form" element={<Form />} />
               <Route path="/bar" element={<Bar />} />
@@ -78,7 +74,7 @@ function App() {
               {/* <Route path="/:id/edit" element={<ProductDetailsPage />} /> */}
               <Route path="/products/:name/edit" element={<ProductEdit />} />
 
-              <Route path="/products/:name/details" element={<ProductDetailsPage />} />
+              <Route path="/products/:id/details" element={<ProductDetailsPage />} />
               <Route path="/carttransactions" element={<CartTransactions />} />
               <Route path="/login" element={<LoginPage />} />
              

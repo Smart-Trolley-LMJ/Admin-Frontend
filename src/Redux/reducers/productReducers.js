@@ -1,4 +1,10 @@
-import { PRODUCT_UPDATE_SUCCESS, 
+import {
+    PRODUCT_FORM_SUBMIT_FAIL,
+    PRODUCT_FORM_SUBMIT_REQUEST,
+   PRODUCT_FORM_SUBMIT_SUCCESS,
+   PRODUCT_CLEAR_FORM_SUBMIT_STATE,
+
+    PRODUCT_UPDATE_SUCCESS, 
     PRODUCT_UPDATE_REQUEST,
      PRODUCT_UPDATE_FAIL,
      PRODUCT_CLEAR_UPDATE_STATE,
@@ -10,6 +16,28 @@ import { PRODUCT_UPDATE_SUCCESS,
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,} from '../constants/productConstants'
+
+
+
+    export const formAddProductReducer = (state = {}, action) => {
+        switch (action.type) {
+            case PRODUCT_FORM_SUBMIT_REQUEST:
+                return { loading: true }
+    
+            case PRODUCT_FORM_SUBMIT_SUCCESS:
+                return { loading: false, serverMsg: action.payload }
+    
+            case PRODUCT_FORM_SUBMIT_FAIL:
+                return { loading: false, error: action.payload }
+    
+            case PRODUCT_CLEAR_FORM_SUBMIT_STATE:
+                    return { loading: false, serverMsg: action.payload}
+    
+            default:
+                return state
+        
+    }
+}
 
 export const addProductReducer = (state = {}, action) => {
     switch (action.type) {
@@ -38,7 +66,7 @@ export const addProductReducer = (state = {}, action) => {
             case PRODUCT_LIST_SUCCESS:
                 return {
                     loading: false,
-                    products: action.payload.products,
+                    products: action.payload,
                     page: action.payload.page,
                     pages: action.payload.pages
                 }

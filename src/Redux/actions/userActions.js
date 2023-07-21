@@ -37,7 +37,7 @@ export const login = (email, password) => async (dispatch) => {
             payload: data
         })
     
-        console.log('okay okay ' + data.msg)
+        console.log('okay okay ' + data.token)
         localStorage.setItem('userInfo', JSON.stringify(data))
 
     } catch (error) {

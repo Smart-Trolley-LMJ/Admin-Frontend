@@ -4,9 +4,11 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { addProductReducer, productListReducer } from './Redux/reducers/productReducers'
 import {userLoginReducer,} from './Redux/reducers/userReducer'
 import {productDetailsReducer} from './Redux/reducers/productReducers'
+import { formAddProductReducer} from './Redux/reducers/productReducers' 
 
 const reducer = combineReducers({
 
+  formAddProduct: formAddProductReducer,
    addProduct: addProductReducer,
     userLogin: userLoginReducer,
 productList: productListReducer,
