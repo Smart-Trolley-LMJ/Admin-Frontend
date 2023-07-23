@@ -57,15 +57,15 @@ function AddProduct() {
     dispatch(addProduct(formData));
   };
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      dispatch(clearupdate());
-    }, 5000);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     dispatch(clearupdate());
+  //   }, 5000);
 
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [pop, error]);
+  //   return () => {
+  //     clearTimeout(timer);
+  //   };
+  // }, [pop, error]);
 
   
   const setField = (field, value) => {

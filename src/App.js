@@ -73,7 +73,7 @@ console.log('this is theme ' +  colorMode)
               <Route path="/geography" element={<Geography />} />
               {/* <Route path="/:id/edit" element={<ProductDetailsPage />} /> */}
               <Route path="/products/:name/edit" element={<ProductEdit />} />
-
+              <Route path="/products/edit/:id" element={<ProductPage />} />
               <Route path="/products/:id/details" element={<ProductDetailsPage />} />
               <Route path="/carttransactions" element={<CartTransactions />} />
               <Route path="/login" element={<LoginPage />} />

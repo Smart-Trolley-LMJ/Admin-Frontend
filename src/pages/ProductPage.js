@@ -12,11 +12,17 @@ import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
+import { editProduct } from "../Redux/actions/productActions";
+import { useParams } from 'react-router-dom'
+
 
 // import InputBase from '@mui/material'
 // import Search
 
 function ProductPage() {
+
+  const { id } = useParams()
+// console.log(id)
   
   const {
      products,
@@ -26,6 +32,7 @@ function ProductPage() {
   // const products = ProductTest
   const [edit, setEdit] = useState(true);
   const [filterText, setFilterText] = useState("");
+  const [form, setForm] = useState({})
 
   // const userLogin = useSelector(state => state.userLogin)
 
@@ -39,7 +46,7 @@ function ProductPage() {
     dispatch(listProducts());
   }, []);
   // console.log("heyyy this is me " + [product.name]);
-  console.log("this is products " + products)
+  // console.log("this is products " + products)
 
   const [editing, setEditing] = useState({});
 
@@ -52,7 +59,7 @@ function ProductPage() {
   };
 
   // Function to handle changes in the input fields
-  const handleChange = (e, product) => {
+  const handleChange = (field, e, product) => {
     const { name, value } = e.target;
     setEditing((prevState) => ({
       ...prevState,
@@ -60,22 +67,35 @@ function ProductPage() {
         ...prevState[product.name],
         [name]: value,
       },
+
     }));
+    setForm((prevForm) => ({
+      ...prevForm,
+    [product.name]: {
+      ...prevForm[product.name],
+      [name]: value,
+    },
+    // [product.product_info_id] : product.product_info_id
+    }))
   };
 
+
   // Function to handle the submit button click
-  const handleSubmit = (product) => {
+  const handleSaveSubmit = (product) => {
     // dispatch(editProduct(product.name, editing[product.name]));
     setEditing((prevState) => ({
       ...prevState,
       [product.name]: undefined,
     }));
+
+    dispatch(editProduct(form, id))
+    console.log('hey there formmmm' + JSON.stringify(form))
   };
 
   const filteredItems = 
   products.filter(
     (product) =>
-      // product.name.toString().toLowerCase().includes(filterText.toLowerCase()) ||
+      product.name.toString().toLowerCase().includes(filterText.toLowerCase()) ||
       product.category.toString().toLowerCase().includes(filterText.toLowerCase()) 
       // ||
       // product.price.toLowerCase().includes(filterText.toLowerCase())
@@ -86,6 +106,19 @@ function ProductPage() {
   const itemsToDisplay = filterText ? filteredItems : products;
   // console.log('okay ' + filteredItems)
 
+
+  const setField = (field, value) => {
+    setForm({
+      ...form,
+      [field]: value
+    })
+
+    // if(!!errors[field])
+    //   setErrors({
+    //     ...errors,
+    //     [field]:null,
+    //   }) 
+  }
 
   return (
     <div>
@@ -126,6 +159,8 @@ function ProductPage() {
               <th>CATEGORY</th>
               <th>ITEMS IN STOCK</th>
               <th>UNIT PRICE</th>
+              <th>WEIGHT</th>
+
               <th></th>
             </tr>
           </thead>
@@ -150,12 +185,13 @@ function ProductPage() {
                 <tr >
                   <td>
                     {editing[product.name] ? (
-                      <input
-                        type="text"
-                        name="name"
-                        value={editing[product.name]?.name || product.name}
-                        onChange={(e) => handleChange(e, product)}
-                      />
+                      // <input
+                      //   type="text"
+                      //   name="name"
+                      //   value={editing[product.name]?.name || product.name}
+                      //   onChange={(e) => handleChange(e, product)}
+                      // />
+                      null
                     ) : (
                       <LinkContainer to={`/products/${product.id}/details`}>
                         <span className="span-caret">{product.name}</span>
@@ -182,10 +218,18 @@ function ProductPage() {
                         type="text"
                         name="category"
                         value={
-                          editing[product.name]?.category || product.category
+                          // editing[product.name]?.category || product.category
+                          form.category
+
                         }
-                        onChange={(e) => handleChange(e, product)}
-                      />
+                        onChange={(e) =>{
+                          setField('category', e.target.value)
+                        }}
+
+                        // onChange={(e) =>{
+                        //   setField('category', e.target.value)
+                        // }}                   
+                           />
                     ) : (
                       <LinkContainer to={`/products/${product.id}/details`}>
                         <span className="span-caret">{product.category}</span>
@@ -198,10 +242,16 @@ function ProductPage() {
                         type="text"
                         name="quantity"
                         value={
-                          editing[product.name]?.quantity || product.quantity
+                          // editing[product.name]?.quantity || 
+                          form.quantity
                         }
-                        onChange={(e) => handleChange(e, product)}
-                      />
+
+                        // onChange={(e) => handleChange(e, product)}
+
+                        onChange={(e) =>{
+                          setField('quantity', e.target.value)
+                        }}     
+                                         />
                     ) : (
                       <LinkContainer to={`/products/${product.id}/details`}>
                         <span className="span-caret">{product.quantity}</span>
@@ -213,12 +263,47 @@ function ProductPage() {
                       <input
                         type="text"
                         name="price"
-                        value={editing[product.name]?.price || product.price}
-                        onChange={(e) => handleChange(e, product)}
-                      />
+                        value={
+                          // editing[product.name]?.price || product.price
+                          form.price
+
+                        }
+                        onChange={(e) =>{
+                          setField('price', e.target.value)
+                        }}
+
+                        // onChange={(e) =>{
+                        //   setField('price', e.target.value)
+                        // }}                     
+                         />
                     ) : (
                       <LinkContainer to={`/products/${product.id}/details`}>
                         <span className="span-caret">{product.price}</span>
+                      </LinkContainer>
+                    )}
+                  </td>
+                  <td>
+                    {editing[product.name] ? (
+                      <input
+                        type="text"
+                        name="weight"
+                        value={
+                          // editing[product.name]?.weight || product.weight
+                          form.weight
+
+                        }
+
+                        onChange={(e) =>{
+                          setField('weight', e.target.value)
+                        }}
+
+                        // onChange={(e) =>{
+                        //   setField('weight', e.target.value)
+                        // }}         
+                                     />
+                    ) : (
+                      <LinkContainer to={`/products/${product.id}/details`}>
+                        <span className="span-caret">{product.weight}</span>
                       </LinkContainer>
                     )}
                   </td>
@@ -227,17 +312,19 @@ function ProductPage() {
                     {editing[product.name] ? (
                       <button
                         className="edit-button"
-                        onClick={() => handleSubmit(product)}
+                        onClick={() => handleSaveSubmit(product)}
                       >
                         Save
                       </button>
                     ) : (
+                      <LinkContainer to={`/products/edit/${product.product_info_id}`}>
                       <button
                         className="edit-button"
                         onClick={() => editClickHandler(product)}
                       >
                         Edit
                       </button>
+                      </LinkContainer>
                     )}
                   </td>
                 </tr>

@@ -15,7 +15,13 @@ import {
 
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
-    PRODUCT_DETAILS_FAIL,} from '../constants/productConstants'
+    PRODUCT_DETAILS_FAIL,
+
+    PRODUCT_EDIT_FAIL,
+    PRODUCT_EDIT_REQUEST,
+   PRODUCT_EDIT_SUCCESS,
+   PRODUCT_CLEAR_EDIT_STATE,
+   PRODUCT_EDIT_RESET,} from '../constants/productConstants'
 
 
 
@@ -94,6 +100,25 @@ export const addProductReducer = (state = {}, action) => {
     
             case PRODUCT_DETAILS_FAIL:
                 return { loading: false, error: action.payload }
+    
+            default:
+                return state
+        }
+    }
+    
+    export const productEditReducer = (state = { product: {} }, action) => {
+        switch (action.type) {
+            case PRODUCT_EDIT_REQUEST:
+                return { loading: true }
+    
+            case PRODUCT_EDIT_SUCCESS:
+                return { loading: false, success: true, product: action.payload }
+    
+            case PRODUCT_EDIT_FAIL:
+                return { loading: false, error: action.payload }
+    
+            case PRODUCT_EDIT_RESET:
+                return { product: {} }
     
             default:
                 return state

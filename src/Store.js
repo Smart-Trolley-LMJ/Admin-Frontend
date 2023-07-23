@@ -5,9 +5,11 @@ import { addProductReducer, productListReducer } from './Redux/reducers/productR
 import {userLoginReducer,} from './Redux/reducers/userReducer'
 import {productDetailsReducer} from './Redux/reducers/productReducers'
 import { formAddProductReducer} from './Redux/reducers/productReducers' 
+import { productEditReducer } from './Redux/reducers/productReducers'
 
 const reducer = combineReducers({
 
+  productEdit: productEditReducer,
   formAddProduct: formAddProductReducer,
    addProduct: addProductReducer,
     userLogin: userLoginReducer,
@@ -17,9 +19,13 @@ productDetails: productDetailsReducer,
 
 })
 
+const userInfoFromStorage = localStorage.getItem('userInfo') ?
+    JSON.parse(localStorage.getItem('userInfo')) : null
 
 
-const initialState = {}
+const initialState = {
+  userLogin: { userInfo: userInfoFromStorage }
+}
 
 const middleware = [thunk]
 
