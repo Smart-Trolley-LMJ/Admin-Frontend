@@ -106,7 +106,7 @@ export const addProductReducer = (state = {}, action) => {
         }
     }
     
-    export const productEditReducer = (state = { product: {} }, action) => {
+    export const productEditReducer = (state = { products: {} }, action) => {
         switch (action.type) {
             case PRODUCT_EDIT_REQUEST:
                 return { loading: true }

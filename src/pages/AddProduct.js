@@ -137,7 +137,7 @@ if(Object.keys(formErrors).length > 0){
   return (
     <div>
       <div className="form-side-div">
-        Product Name
+       <h5>Product Name</h5> 
         <div className="input-div">
           <input
             className="input-field"

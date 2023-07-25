@@ -191,6 +191,20 @@ export const editProduct = (product, product_info_id) => async (dispatch, getSta
       type: PRODUCT_DETAILS_SUCCESS,
       payload: data,
     });
+
+    // dispatch({ type: PRODUCT_LIST_REQUEST });
+
+    // const { listdata } = await axios.get(
+    //   `https://smtrolley.onrender.com/inventories`
+    // );
+
+    // dispatch({
+    //   type: PRODUCT_LIST_SUCCESS,
+    //   payload: listdata,
+    // });
+    dispatch(listProducts())
+    
+   
   } catch (error) {
     dispatch({
       type: PRODUCT_EDIT_FAIL,
