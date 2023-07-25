@@ -12,7 +12,7 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { clearupdate } from "../Redux/actions/productActions";
 import { formAddProduct } from '../Redux/actions/productActions'
-// import { formAddProduct } from "../Redux/actions/productActions";
+import axios from 'axios'
 
 
 
@@ -23,6 +23,9 @@ function AddProduct() {
   const [csvfile, setCsvFile] = useState(null);
   const [form, setForm] = useState({})
   const [errors, setErrors] = useState({})
+  const [uploading, setUploading] = useState(false)
+  const [imageCloud, setImageCloud] = useState('')
+
 
 
   const addProductInfo = useSelector((state) => state.addProduct);
@@ -66,6 +69,16 @@ function AddProduct() {
   //     clearTimeout(timer);
   //   };
   // }, [pop, error]);
+  useEffect(() => {
+    // This useEffect runs whenever imageCloud changes.
+    // Check if imageCloud is not empty and update form.image
+    if (imageCloud) {
+      setForm((prevForm) => ({
+        ...prevForm,
+        image: imageCloud,
+      }));
+    }
+  }, [imageCloud]);
 
   
   const setField = (field, value) => {
@@ -104,6 +117,7 @@ if(Object.keys(formErrors).length > 0){
       console.log('form submitted')
       // console.log(`product: ${form}`)
       console.log(form)
+      console.log(imageCloud)
 
       const transformedForm = {
         product: {
@@ -113,7 +127,7 @@ if(Object.keys(formErrors).length > 0){
         product_info: {
           description: form.description,
           price: parseFloat(form.price), // Convert price to a number
-          image_url: form.image,
+          image_url: form.image || imageCloud,
           weight: parseFloat(form.weight), // Convert weight to a number
           category: form.category,
         },
@@ -134,6 +148,37 @@ if(Object.keys(formErrors).length > 0){
     
   }
 
+  const preset_key = 'ff2nd3vj'
+  const cloud_name = 'drvu9dhnp'
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0]
+    console.log(file)
+    const formData = new FormData()
+
+    formData.append('file', file)
+    formData.append('upload_preset', preset_key)
+
+    setUploading(true)
+
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }
+
+        const { data } = await axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, formData, config)
+
+console.log(data.url)
+        setImageCloud(data.url)
+        setUploading(false)
+
+    } catch (error) {
+        setUploading(false)
+    }
+}
+console.log('this is image ' + imageCloud)
   return (
     <div>
       <div className="form-side-div">
@@ -174,18 +219,18 @@ if(Object.keys(formErrors).length > 0){
             }}
           />
         </div>
-        Product Image
+        {/* Product Image
         <div div className="input-div">
           <input
             className="input-field"
             type="text"
             placeholder="Enter image"
-            // value={'hellods'}
-            onChange={(e) =>{
-              setField('image', e.target.value)
+            // value={ image}
+            onChange={(e) =>{ 
+              setField('image', e.target.value || imageCloud)
             }}
           />
-        </div>
+        </div> */}
         Product Weight
         <div div className="input-div">
           <input
@@ -233,7 +278,11 @@ if(Object.keys(formErrors).length > 0){
             <input type="file"
             //  onChange={changeHandler} 
              style={{}}
+             onChange={uploadFileHandler}
+
               />
+                                              {uploading && <Loader />}
+
             <span className="choose-file-button"  style={{paddingBottom: '50px'}}>Choose Image</span>
           </label>
         </div>

@@ -29,7 +29,7 @@ function ProductPage() {
   const [edit, setEdit] = useState(true);
   const [filterText, setFilterText] = useState("");
   const [form, setForm] = useState({});
-
+console.log(JSON.stringify(products))
   // const userLogin = useSelector(state => state.userLogin)
 
   const theme = useTheme();
@@ -156,7 +156,7 @@ function ProductPage() {
             <tr>
               {/* <th>ID</th> */}
               <th>NAME</th>
-              <th>PHOTO</th>
+              <th>IMAGE</th>
               <th>CATEGORY</th>
               <th>ITEMS IN STOCK</th>
               <th>UNIT PRICE</th>
@@ -203,14 +203,22 @@ function ProductPage() {
                     {editing[product.name] ? (
                       <input
                         type="text"
-                        name="photo"
-                        value={editing[product.name]?.photo || product.photo}
+                        name="image"
+                        value={editing[product.name]?.image_url || product.image_url}
                         onChange={(e) => handleChange(e, product)}
                       />
                     ) : (
+                      // <LinkContainer to={`/products/${product.id}/details`}>
+                      //   <span className="span-caret">{product.image_url}</span>
+                      // </LinkContainer>
+
                       <LinkContainer to={`/products/${product.id}/details`}>
-                        <span className="span-caret">{product.photo}</span>
-                      </LinkContainer>
+                        <div className="product-image-container">
+                        <img src={`${product.image_url}`} className="product-image"></img>
+
+                        </div>
+                       </LinkContainer>
+
                     )}
                   </td>
                   <td>
