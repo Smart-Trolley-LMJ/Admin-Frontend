@@ -167,7 +167,7 @@ export const editProduct = (product, product_info_id) => async (dispatch, getSta
       userLogin: { userInfo },
     } = getState();
 
-    console.log('mmmmmm ' + userInfo.token)
+    // console.log('mmmmmm ' + userInfo.token)
 
 
     const config = {

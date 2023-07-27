@@ -14,6 +14,8 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { editProduct } from "../Redux/actions/productActions";
 import { useParams } from "react-router-dom";
+import axios from 'axios'
+
 
 // import InputBase from '@mui/material'
 // import Search
@@ -29,7 +31,9 @@ function ProductPage() {
   const [edit, setEdit] = useState(true);
   const [filterText, setFilterText] = useState("");
   const [form, setForm] = useState({});
-console.log(JSON.stringify(products))
+  const [uploading, setUploading] = useState(false)
+  const [imageCloud, setImageCloud] = useState('')
+// console.log(JSON.stringify(products))
   // const userLogin = useSelector(state => state.userLogin)
 
   const theme = useTheme();
@@ -119,6 +123,48 @@ console.log(JSON.stringify(products))
     //   })
   };
 
+  useEffect(() => {
+    // This useEffect runs whenever imageCloud changes.
+    // Check if imageCloud is not empty and update form.image
+    if (imageCloud) {
+      setForm((prevForm) => ({
+        ...prevForm,
+        image_url: imageCloud,
+      }));
+    }
+  }, [imageCloud]);
+
+  const preset_key = 'ff2nd3vj'
+  const cloud_name = 'drvu9dhnp'
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0]
+    // console.log(file)
+    const formData = new FormData()
+
+    formData.append('file', file)
+    formData.append('upload_preset', preset_key)
+
+    setUploading(true)
+
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }
+
+        const { data } = await axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, formData, config)
+
+console.log(data.url)
+        setImageCloud(data.url)
+        setUploading(false)
+
+    } catch (error) {
+        setUploading(false)
+    }
+}
+
   return (
     <div>
       <Typography
@@ -201,17 +247,21 @@ console.log(JSON.stringify(products))
                   </td>
                   <td>
                     {editing[product.name] ? (
-                      <input
-                        type="text"
-                        name="image"
-                        value={editing[product.name]?.image_url || product.image_url}
-                        onChange={(e) => handleChange(e, product)}
-                      />
-                    ) : (
-                      // <LinkContainer to={`/products/${product.id}/details`}>
-                      //   <span className="span-caret">{product.image_url}</span>
-                      // </LinkContainer>
+                      // <input
+                      //   type="text"
+                      //   name="image"
+                      //   value={editing[product.name]?.image_url || product.image_url}
+                      //   onChange={(e) => handleChange(e, product)}
+                      // />
+                      <input type="file"
+                      //  onChange={changeHandler} 
+                       style={{}}
+                       onChange={uploadFileHandler}
+          
+                        />
 
+                    ) : (
+                
                       <LinkContainer to={`/products/${product.id}/details`}>
                         <div className="product-image-container">
                         <img src={`${product.image_url}`} className="product-image"></img>
