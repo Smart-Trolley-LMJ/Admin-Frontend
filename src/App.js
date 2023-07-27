@@ -24,6 +24,7 @@ import CartTransactions from "./pages/CartTransactions";
 import ProductEdit from "./pages/ProductEdit";
 import { useSelector } from "react-redux";
 import './App.css'
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -69,12 +70,12 @@ console.log('this is theme ' +  colorMode)
               <Route path="/pie" element={<Pie />} />
               <Route path="/line" element={<Line />} />
               <Route path="/faq" element={<FAQ />} />
-              <Route path="/calendar" element={<Calendar />} />
+              <Route path="/products/:id/details" element={<ProductDetails />} />
               <Route path="/geography" element={<Geography />} />
               {/* <Route path="/:id/edit" element={<ProductDetailsPage />} /> */}
               <Route path="/products/:name/edit" element={<ProductEdit />} />
               <Route path="/products/edit/:id" element={<ProductPage />} />
-              <Route path="/products/:id/details" element={<ProductDetailsPage />} />
+              {/* <Route path="/products/:id/details" element={<ProductDetailsPage />} /> */}
               <Route path="/carttransactions" element={<CartTransactions />} />
               <Route path="/login" element={<LoginPage />} />
              

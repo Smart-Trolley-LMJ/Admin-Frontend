@@ -15,6 +15,7 @@ import Loader from "../components/Loader";
 import { editProduct } from "../Redux/actions/productActions";
 import { useParams } from "react-router-dom";
 import axios from 'axios'
+import ProductDetails from './ProductDetails'
 
 
 // import InputBase from '@mui/material'
@@ -165,8 +166,11 @@ console.log(data.url)
     }
 }
 
+
+
   return (
     <div>
+{/* <ProductDetails name='tripp'/> */}
       <Typography
         variant="h2"
         color={colors.grey[100]}
@@ -241,7 +245,7 @@ console.log(data.url)
                       </LinkContainer>
                     )} */}
 
-                    <LinkContainer to={`/products/${product.id}/details`}>
+                    <LinkContainer to={`/products/${product.product_info_id}/details`}>
                       <span className="span-caret">{product.name}</span>
                     </LinkContainer>
                   </td>
@@ -262,7 +266,7 @@ console.log(data.url)
 
                     ) : (
                 
-                      <LinkContainer to={`/products/${product.id}/details`}>
+                      <LinkContainer to={`/products/${product.product_info_id}/details`}>
                         <div className="product-image-container">
                         <img src={`${product.image_url}`} className="product-image"></img>
 
@@ -289,7 +293,7 @@ console.log(data.url)
                         // }}
                       />
                     ) : (
-                      <LinkContainer to={`/products/${product.id}/details`}>
+                      <LinkContainer to={`/products/${product.product_info_id}/details`}>
                         <span className="span-caret">{product.category}</span>
                       </LinkContainer>
                     )}
@@ -310,7 +314,7 @@ console.log(data.url)
                         }}
                       />
                     ) : (
-                      <LinkContainer to={`/products/${product.id}/details`}>
+                      <LinkContainer to={`/products/${product.product_info_id}/details`}>
                         <span className="span-caret">{product.quantity}</span>
                       </LinkContainer>
                     )}
@@ -333,7 +337,7 @@ console.log(data.url)
                         // }}
                       />
                     ) : (
-                      <LinkContainer to={`/products/${product.id}/details`}>
+                      <LinkContainer to={`/products/${product.product_info_id}/details`}>
                         <span className="span-caret">{product.price}</span>
                       </LinkContainer>
                     )}
@@ -356,7 +360,7 @@ console.log(data.url)
                         // }}
                       />
                     ) : (
-                      <LinkContainer to={`/products/${product.id}/details`}>
+                      <LinkContainer to={`/products/${product.product_info_id}/details`}>
                         <span className="span-caret">{product.weight}</span>
                       </LinkContainer>
                     )}
