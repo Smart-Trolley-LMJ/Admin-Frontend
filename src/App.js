@@ -25,6 +25,8 @@ import ProductEdit from "./pages/ProductEdit";
 import { useSelector } from "react-redux";
 import './App.css'
 import ProductDetails from "./pages/ProductDetails";
+import AddChoice from "./pages/AddChoice";
+import AddCsv from "./pages/AddCsv";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -63,7 +65,10 @@ console.log('this is theme ' +  colorMode)
               
               <Route path="/" element={<ProductPage />} />
               <Route path="/products" element={<ProductPage />} />
-              <Route path="/addproduct" element={<AddProduct />} />
+              <Route path="/addproduct/form" element={<AddProduct />} />
+              <Route path="/addproduct" element={<AddChoice />} />
+              <Route path="/addproduct/csv" element={<AddCsv />} />
+
               <Route path="/invoices" element={<Invoices />} />
               <Route path="/form" element={<Form />} />
               <Route path="/bar" element={<Bar />} />

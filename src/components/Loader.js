@@ -7,8 +7,8 @@ function Loader() {
             animation='border'
             role='status'
             style={{
-                height: '100px',
-                width: '100px',
+                height: '70px',
+                width: '70px',
                 margin: '170px',
                 display: 'block'
             }}

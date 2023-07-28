@@ -5,7 +5,6 @@ import ProductTest from "../ProductTest";
 import { tokens } from "../theme";
 import { Typography, Box, useTheme, IconButton } from "@mui/material";
 import "./ProductPage.css";
-import cosmetics from "../images/cosmetics.png";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../Redux/actions/productActions";
 import SearchIcon from "@mui/icons-material/Search";
