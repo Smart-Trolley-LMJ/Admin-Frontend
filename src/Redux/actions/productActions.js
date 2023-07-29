@@ -60,18 +60,22 @@ export const formAddProduct =
     }
   };
 
-export const addProduct = (csvfile) => async (dispatch) => {
+export const addProduct = (csvfile) => async (dispatch, getState) => {
   try {
     dispatch({ type: PRODUCT_UPDATE_REQUEST });
 
     console.log("CSV file object " + csvfile);
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
 
     // console.log(' ' + obj)
 
     const config = {
       headers: {
         "Content-type": "multipart/form-data",
-        // Authorization: `Bearer ${userInfo.token}`
+        Authorization: `${userInfo.token}`
       },
     };
 
@@ -102,6 +106,10 @@ export const clearupdate = () => (dispatch) => {
     const data = null;
     dispatch({
       type: PRODUCT_CLEAR_UPDATE_STATE,
+      payload: data,
+    });
+    dispatch({
+      type: PRODUCT_CLEAR_FORM_SUBMIT_STATE,
       payload: data,
     });
   } catch {}

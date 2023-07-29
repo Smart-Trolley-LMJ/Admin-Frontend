@@ -2,10 +2,10 @@ import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { addProduct } from "../Redux/actions/productActions";
 import { Link } from "react-router-dom";
-
+import { clearupdate } from '../Redux/actions/productActions';
 
 
 
@@ -20,7 +20,17 @@ function AddCsv() {
 
   const [csvfile, setCsvFile] = useState(null);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(clearupdate());
+      // pop = false
+      // setErrors(false)
+    }, 5000);
 
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [pop, error]);
 
 
   const dispatch = useDispatch();

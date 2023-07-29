@@ -75,8 +75,8 @@ function LoginPage({ location, history, handleLogin }) {
           style={{ position: "", width: "540px" }}
         >
           <div className="formbutton">
-            <h5 style={{height:'91px', marginLeft:'-104px', top:'-113px', position:'absolute', color: 'white'}}>USERNAME</h5>
-            <h5 style={{height:'91px', marginLeft:'-105px', top:'-66px', position:'absolute', color: 'white'}}>PASSWORD</h5>
+            <h5 style={{height:'91px', marginLeft:'-115px', top:'-113px', position:'absolute', color: 'white'}}>USERNAME</h5>
+            <h5 style={{height:'91px', marginLeft:'-115px', top:'-66px', position:'absolute', color: 'white'}}>PASSWORD</h5>
 
           <div>
           <Form.Group controlId="username" style={{width:'450px'}}>

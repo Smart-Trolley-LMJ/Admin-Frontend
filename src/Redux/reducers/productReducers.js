@@ -37,7 +37,7 @@ import {
                 return { loading: false, error: action.payload }
     
             case PRODUCT_CLEAR_FORM_SUBMIT_STATE:
-                    return { loading: false, serverMsg: action.payload}
+                    return { loading: false, serverMsg: action.payload, error: action.payload}
     
             default:
                 return state
@@ -57,7 +57,7 @@ export const addProductReducer = (state = {}, action) => {
                 return { loading: false, error: action.payload }
 
             case PRODUCT_CLEAR_UPDATE_STATE:
-                    return { loading: false, serverMsg: action.payload}
+                    return { loading: false, serverMsg: action.payload, error: action.payload}
     
             default:
                 return state

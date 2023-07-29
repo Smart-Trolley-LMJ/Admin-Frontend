@@ -25,7 +25,7 @@
 
 
 .csv-side-div{
-    margin-top: 290px;
+    margin-top: 90px;
 }
 
 .choose-file-container {
@@ -39,11 +39,11 @@ margin-left: 685px;
   }
 
   .choose-image-container{
-    margin-left: 685px;
+    margin-left: 195px;
     display: flex;
     align-items: center;
     cursor: pointer;
-    width: 90px;
+    width: 92px;
   }
 
 

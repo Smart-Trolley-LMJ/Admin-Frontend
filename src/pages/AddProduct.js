@@ -44,6 +44,8 @@ function AddProduct() {
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(clearupdate());
+      // pop = false
+      // setErrors(false)
     }, 5000);
 
     return () => {
@@ -85,6 +87,10 @@ function AddProduct() {
       newErrors.price = "Please enter the product description";
     if (!quantity || quantity === "")
       newErrors.quantity = "Please enter the product location";
+      if (!description || description === "")
+      newErrors.description = "Please enter the product location";
+      if (!weight || weight === "")
+      newErrors.weight = "Please enter the product location";
 
     return newErrors;
   };
@@ -169,7 +175,7 @@ function AddProduct() {
           Go back
         </Link>
       </div>
-      <div className="form-side-div">
+      {/* <div className="form-side-div">
         <h5>Product Name</h5>
         <div className="input-div">
           <input
@@ -233,7 +239,7 @@ function AddProduct() {
         <div className="input-div">
           <Form.Group controlId="item">
             <Form.Label>Item Type</Form.Label>
-            <Form.Select
+            <Form.Select type="submit" style={{width:'130px',height:'30px' }}
               value={form.item}
               isInvalid={!!errors.item}
               placeholder="Select category"
@@ -267,17 +273,35 @@ function AddProduct() {
           </label>
         </div>
         <button onClick={formSubmitHandler}>Submit Form</button>
-      </div>
+      </div> */}
 
 
       <section id="contact" class="contact">
-      <div class="container" data-aos="fade-up">
+      <div class="container" data-aos="fade-up" style={{marginLeft:'420px'}}>
 
         <div class="section-title">
           <h2>FORM</h2>
-          <p>FORM FILL</p>
+          <p>FORM OPTION</p>
         </div>
+        <div className="message-loader">
+          {pop ? (<div style={{width:'600px'}}>
+            <Message variant="success" >
+              Form Submitted Successfully!
+              </Message>
+              </div>
+            
+          ) : error ? (<div style={{width:'600px'}}><Message variant="danger">{error}</Message></div>
+            
+          ) 
+          : (
+            // loading && <Loader />
+            <div style={{position:'absolute', top:'-160px', marginLeft:'140px'}}>{loading && <Loader />}</div>
 
+          )
+          }
+                      
+
+        </div>
        
 
         <div class="row mt-5">
@@ -288,22 +312,25 @@ function AddProduct() {
             <form action="forms/contact.php" method="post" role="form" class="php-email-form">
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Product Name" required  onChange={(e) => {
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Product Name" isInvalid={!!errors.name} required  onChange={(e) => {
               setField("name", e.target.value);
-            }}/>
+            }}
+            
+            />
+            {errors.name && <div class="invalid-feedback">{errors.name}</div>}
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Price" required  onChange={(e) => {
+                  <input type="price" class="form-control" name="price" id="price" placeholder="Price" isInvalid={!!errors.price} required  onChange={(e) => {
               setField("price", e.target.value);
             }}/>
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Quantity" required   onChange={(e) => {
+                  <input type="quantity" class="form-control" name="quantity" id="quantity" placeholder="Quantity" isInvalid={!!errors.quantity} required   onChange={(e) => {
               setField("quantity", e.target.value);
             }}/>
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Weight" required  onChange={(e) => {
+                  <input type="weight" class="form-control" name="weight" id="weight" placeholder="Weight" isInvalid={!!errors.weight} required  onChange={(e) => {
               setField("weight", e.target.value);
             }}/>
                 </div>
@@ -314,7 +341,7 @@ function AddProduct() {
             }} />
               </div> */}
               <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Description" required  onChange={(e) => {
+                <textarea class="form-control" name="message" rows="5" placeholder="Description" isInvalid={!!errors.description} required  onChange={(e) => {
               setField("description", e.target.value);
             }}></textarea>
               </div>
@@ -322,7 +349,55 @@ function AddProduct() {
                 <div class="loading">Loading</div>
                 <div class="error-message"></div>
                 <div class="sent-message">Your message has been sent. Thank you!</div>
+
               </div>
+              <div className="input-div">
+                <div style={{display:'flex'}}>
+                  <Form.Group controlId="item">
+            <Form.Label>Item Type</Form.Label>
+            <Form.Select type="submit" style={{width:'130px',height:'30px' }}
+              value={form.item}
+              isInvalid={!!errors.item}
+              placeholder="Select category"
+              onChange={(e) => {
+                setField("category", e.target.value);
+              }}
+            >
+              <option>Select a category</option>
+              <option>Drinks</option>
+              <option>Food</option>
+              <option>Soap</option>
+            </Form.Select>
+          </Form.Group>
+
+          <div div className="input-div">
+          <label class="choose-image-container">
+            <input
+              type="file"
+              //  onChange={changeHandler}
+              style={{}}
+              onChange={uploadFileHandler}
+            />
+            {/* {uploading && <Loader />} */}
+            <div className="message-product" style={{marginLeft:'-450px'}}>
+              {/* {error && <Message variant="danger">{error}</Message>} */}
+              {uploading && <Loader />}
+              {/* <Loader style={{height:'10px',width:'10px'}}/> */}
+            </div>
+
+            <span
+              className="choose-file-button"
+              style={{ paddingBottom: "50px",
+               textAlign:'center' }}
+            >
+                {/* <Loader /> */}
+              Choose Image
+            </span>
+          </label>
+        </div>
+          </div>
+          
+        </div>
               <div class="text-center"><button type="submit" onClick={formSubmitHandler}>Send Message</button></div>
             </form>
 
