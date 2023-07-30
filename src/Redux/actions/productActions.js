@@ -3,20 +3,28 @@ import {
   PRODUCT_FORM_SUBMIT_REQUEST,
   PRODUCT_FORM_SUBMIT_SUCCESS,
   PRODUCT_CLEAR_FORM_SUBMIT_STATE,
+
   PRODUCT_UPDATE_FAIL,
   PRODUCT_UPDATE_REQUEST,
   PRODUCT_UPDATE_SUCCESS,
   PRODUCT_CLEAR_UPDATE_STATE,
+
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
   PRODUCT_LIST_FAIL,
+
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_DETAILS_FAIL,
+
   PRODUCT_EDIT_FAIL,
   PRODUCT_EDIT_REQUEST,
   PRODUCT_EDIT_SUCCESS,
   PRODUCT_CLEAR_EDIT_STATE,
+
+  TRANSACTIONS_LIST_REQUEST,
+  TRANSACTIONS_LIST_SUCCESS,
+  TRANSACTIONS_LIST_FAIL,
 } from "../constants/productConstants";
 import axios from "axios";
 import { useEffect } from "react";
@@ -216,6 +224,42 @@ export const editProduct = (product, product_info_id) => async (dispatch, getSta
   } catch (error) {
     dispatch({
       type: PRODUCT_EDIT_FAIL,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const listTransactions = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: TRANSACTIONS_LIST_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(
+      `https://smtrolley.onrender.com/transactions`,
+      config
+    );
+
+    dispatch({
+      type: TRANSACTIONS_LIST_SUCCESS,
+      payload: data,
+    });
+    console.log('eiii this data' + data)
+  } catch (error) {
+    dispatch({
+      type: TRANSACTIONS_LIST_FAIL,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail

@@ -84,9 +84,9 @@ const Sidebar = () => {
                   ADMIN MANAGEMENT
                 </Typography>
                 
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                {/* <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
-                </IconButton>
+                </IconButton> */}
               </Box>
             )}
           </MenuItem>

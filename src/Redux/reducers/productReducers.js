@@ -21,7 +21,11 @@ import {
     PRODUCT_EDIT_REQUEST,
    PRODUCT_EDIT_SUCCESS,
    PRODUCT_CLEAR_EDIT_STATE,
-   PRODUCT_EDIT_RESET,} from '../constants/productConstants'
+   PRODUCT_EDIT_RESET,
+
+   TRANSACTIONS_LIST_REQUEST,
+   TRANSACTIONS_LIST_SUCCESS,
+   TRANSACTIONS_LIST_FAIL,} from '../constants/productConstants'
 
 
 
@@ -125,3 +129,23 @@ export const addProductReducer = (state = {}, action) => {
         }
     }
     
+    export const transactionsListReducer = (state = { transactions: [] }, action) => {
+        switch (action.type) {
+            case TRANSACTIONS_LIST_REQUEST:
+                return { loading: true, transactions: [] }
+    
+            case TRANSACTIONS_LIST_SUCCESS:
+                return {
+                    loading: false,
+                    transactions: action.payload,
+                    page: action.payload.page,
+                    pages: action.payload.pages
+                }
+    
+            case TRANSACTIONS_LIST_FAIL:
+                return { loading: false, error: action.payload }
+    
+            default:
+                return state
+        }
+    }

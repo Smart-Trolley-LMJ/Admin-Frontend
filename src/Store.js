@@ -6,6 +6,7 @@ import {userLoginReducer,} from './Redux/reducers/userReducer'
 import {productDetailsReducer} from './Redux/reducers/productReducers'
 import { formAddProductReducer} from './Redux/reducers/productReducers' 
 import { productEditReducer } from './Redux/reducers/productReducers'
+import { transactionsListReducer } from './Redux/reducers/productReducers'
 
 const reducer = combineReducers({
 
@@ -15,6 +16,7 @@ const reducer = combineReducers({
     userLogin: userLoginReducer,
 productList: productListReducer,
 productDetails: productDetailsReducer,
+transactionsList: transactionsListReducer,
 
 
 })
