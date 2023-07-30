@@ -10,6 +10,7 @@ import Loader from "../components/Loader";
 import smart_trolley_image from "../images/smart_trolley.jpg"
 import './LoginPage.css'
 import { clearupdate } from "../Redux/actions/productActions";
+import { Navbar, Nav, Container } from 'react-bootstrap'
 
 
 function LoginPage({ location, history, handleLogin }) {
@@ -52,7 +53,28 @@ function LoginPage({ location, history, handleLogin }) {
     <div>
     {/* <div className="loginBackground"> */}
     
-      <Header />
+      {/* <Header style={{position:'fixed'}}/> */}
+      <>
+            <div className='nav-homepage'>
+                <Container>
+                    <div className='divy'>
+                  
+                           <div className='name-shop'>
+                            SMART TROLLEY SHOP 
+                            </div>
+                                {/* </Navbar.Brand> */}
+                    
+
+
+                         
+
+
+                      
+                    </div>
+                </Container>
+            </div>
+        </>
+      <div >
 <section className='hero'>
       <img src={smart_trolley_image}></img>
       <FormContainer>
@@ -117,7 +139,7 @@ function LoginPage({ location, history, handleLogin }) {
             </Row> */}
       </FormContainer>
     {/* </div> */}
-    </section>
+    </section></div>
     </div>
   );
 }

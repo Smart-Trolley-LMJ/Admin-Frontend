@@ -2,7 +2,19 @@
 height: 100px;
 background-color: #1F2A40;
 box-shadow: 894px;
+position: fixed;
+z-index: 3;
+width: 1900px;
 }
+
+.nav-homepage {
+    height: 100px;
+    background-color: #1F2A40;
+    box-shadow: 894px;
+    /* position: fixed; */
+    z-index: 3;
+    width: 1900px;
+    }
 
 .name-shop {
     font-size: 50px;

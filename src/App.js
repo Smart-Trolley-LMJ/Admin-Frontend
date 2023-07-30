@@ -59,7 +59,7 @@ console.log('this is theme ' +  colorMode)
         <div className="app">
           <Sidebar isSidebar={isSidebar} />
           <main className="content">
-            <Topbar setIsSidebar={setIsSidebar} />
+            {/* <Topbar setIsSidebar={setIsSidebar} /> */}
             <div className="div-padding">
             <Routes>
               

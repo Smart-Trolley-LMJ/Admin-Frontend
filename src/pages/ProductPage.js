@@ -168,17 +168,18 @@ console.log(data.url)
 
 
   return (
-    <div>
+    <div className="allproduct-div">
 {/* <ProductDetails name='tripp'/> */}
-      <Typography
+      {/* <Typography
         variant="h2"
         color={colors.grey[100]}
         fontWeight="bold"
         sx={{ m: "0 0 5px 0", marginLeft: "432px", marginBottom: "20px" }}
       >
         ALL PRODUCTS IN THE STORE
-      </Typography>
-      <div>
+      </Typography> */}
+      <div  >
+        <div style={{marginLeft:'18px'}}>
         <Box
           display="flex"
           backgroundColor={colors.primary[400]}
@@ -190,11 +191,12 @@ console.log(data.url)
             placeholder="Search"
             onChange={handlesearch}
           />
-          <IconButton type="button" sx={{ p: 1 }}>
-            <SearchIcon />
+          <IconButton type="button" sx={{ p: 1 }} style={{marginRight:'10px'}}>
+            <SearchIcon style={{marginLeft:'10px'}}/>
           </IconButton>
         </Box>
-        <Table
+        </div>
+        {/* <Table
           striped
           bordered
           hover
@@ -203,7 +205,6 @@ console.log(data.url)
         >
           <thead>
             <tr>
-              {/* <th>ID</th> */}
               <th>NAME</th>
               <th>IMAGE</th>
               <th>CATEGORY</th>
@@ -217,7 +218,6 @@ console.log(data.url)
 
           <tbody>
             <div className="message-product">
-              {/* {error && <Message variant="danger">{error}</Message>} */}
               {loading && <Loader />}
             </div>
             {products && !loading && !filteredItems.length && (
@@ -231,18 +231,7 @@ console.log(data.url)
               itemsToDisplay.map((product) => (
                 <tr>
                   <td>
-                    {/* {editing[product.name] ?
-                     <input
-                      type="text"
-                      name="name"
-                      value={editing[product.name]?.name || product.name}
-                      onChange={(e) => handleChange(e, product)}
-                    />
-                    null : (
-                      <LinkContainer to={`/products/${product.id}/details`}>
-                        <span className="span-caret">{product.name}</span>
-                      </LinkContainer>
-                    )} */}
+                   
 
                     <LinkContainer to={`/products/${product.product_info_id}/details`}>
                       <span className="span-caret">{product.name}</span>
@@ -250,14 +239,8 @@ console.log(data.url)
                   </td>
                   <td>
                     {editing[product.name] ? (
-                      // <input
-                      //   type="text"
-                      //   name="image"
-                      //   value={editing[product.name]?.image_url || product.image_url}
-                      //   onChange={(e) => handleChange(e, product)}
-                      // />
+                    
                       <input type="file"
-                      //  onChange={changeHandler} 
                        style={{}}
                        onChange={uploadFileHandler}
           
@@ -287,9 +270,7 @@ console.log(data.url)
                           setField("category", e.target.value);
                         }}
 
-                        // onChange={(e) =>{
-                        //   setField('category', e.target.value)
-                        // }}
+                        
                       />
                     ) : (
                       <LinkContainer to={`/products/${product.product_info_id}/details`}>
@@ -303,10 +284,8 @@ console.log(data.url)
                         type="text"
                         name="quantity"
                         value={
-                          // editing[product.name]?.quantity ||
                           form.quantity
                         }
-                        // onChange={(e) => handleChange(e, product)}
 
                         onChange={(e) => {
                           setField("quantity", e.target.value);
@@ -324,16 +303,13 @@ console.log(data.url)
                         type="text"
                         name="price"
                         value={
-                          // editing[product.name]?.price || product.price
                           form.price
                         }
                         onChange={(e) => {
                           setField("price", e.target.value);
                         }}
 
-                        // onChange={(e) =>{
-                        //   setField('price', e.target.value)
-                        // }}
+                       
                       />
                     ) : (
                       <LinkContainer to={`/products/${product.product_info_id}/details`}>
@@ -390,7 +366,192 @@ console.log(data.url)
               ))
             )}
           </tbody>
-        </Table>
+        </Table> */}
+        <div class="col-12" style={{marginTop:"20px"}}>
+        <div className="message-product">
+              {error && <Message variant="danger">{error}</Message>}
+              {loading && <Loader />}
+            </div>
+              <div class="card top-selling overflow-auto">
+
+                {/* <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div> */}
+                
+
+                <div class="card-body pb-0">
+                  <h5 class="card-title">Our Products <span>| Today</span></h5>
+                
+                  <table class="table table-borderless" striped>
+                    <thead>
+                      <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Price</th>
+
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Weight</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                  
+            {products && !loading && !filteredItems.length && (
+              <div>
+                There are no items to display adjust your filter criteria
+              </div>
+            )}
+            {error ? (
+              <Message variant="danger">{error}</Message>
+            ) : (
+              itemsToDisplay.map((product) => (
+                      <tr>
+                        <th scope="row"><a href="#">   {editing[product.name] ? (
+                    
+                    <input type="file"
+                     style={{}}
+                     onChange={uploadFileHandler}
+        
+                      />
+
+                  ) : (
+              
+                    <LinkContainer to={`/products/${product.product_info_id}/details`}>
+                      <div className="product-image-container">
+                      <img src={`${product.image_url}`} className="product-image"></img>
+
+                      </div>
+                     </LinkContainer>
+
+                  )}</a></th>
+                        <td><span href="#" class="text-primary fw-bold" > <LinkContainer to={`/products/${product.product_info_id}/details`}>
+                      <span className="span-caret-name">{product.name}</span>
+                    </LinkContainer></span></td>
+                       
+                        <td class="fw-bold">  {editing[product.name] ? (
+                      <input
+                        type="text"
+                        name="category"
+                        value={
+                          // editing[product.name]?.category || product.category
+                          form.category
+                        }
+                        onChange={(e) => {
+                          setField("category", e.target.value);
+                        }}
+
+                        // onChange={(e) =>{
+                        //   setField('category', e.target.value)
+                        // }}
+                      />
+                    ) : (
+                      <LinkContainer to={`/products/${product.product_info_id}/details`}>
+                        <span className="span-caret">{product.category}</span>
+                      </LinkContainer>
+                    )}</td>
+                        <td> {editing[product.name] ? (
+                      <input
+                        type="text"
+                        name="quantity"
+                        value={
+                          // editing[product.name]?.quantity ||
+                          form.quantity
+                        }
+                        // onChange={(e) => handleChange(e, product)}
+
+                        onChange={(e) => {
+                          setField("quantity", e.target.value);
+                        }}
+                      />
+                    ) : (
+                      <LinkContainer to={`/products/${product.product_info_id}/details`}>
+                        <span className="span-caret">{product.quantity}</span>
+                      </LinkContainer>
+                    )}</td>
+                    <td>
+                    {editing[product.name] ? (
+                      <input
+                        type="text"
+                        name="price"
+                        value={
+                          // editing[product.name]?.price || product.price
+                          form.price
+                        }
+                        onChange={(e) => {
+                          setField("price", e.target.value);
+                        }}
+
+                        // onChange={(e) =>{
+                        //   setField('price', e.target.value)
+                        // }}
+                      />
+                    ) : (
+                      <LinkContainer to={`/products/${product.product_info_id}/details`}>
+                        <span className="span-caret">{product.price}</span>
+                      </LinkContainer>
+                    )}
+                    </td>
+                    <td> {editing[product.name] ? (
+                      <input
+                        type="text"
+                        name="weight"
+                        value={
+                          // editing[product.name]?.weight || product.weight
+                          form.weight
+                        }
+                        onChange={(e) => {
+                          setField("weight", e.target.value);
+                        }}
+
+                        // onChange={(e) =>{
+                        //   setField('weight', e.target.value)
+                        // }}
+                      />
+                    ) : (
+                      <LinkContainer to={`/products/${product.product_info_id}/details`}>
+                        <span className="span-caret">{product.weight}</span>
+                      </LinkContainer>
+                    )}</td>
+                     <td>
+                    {editing[product.name] ? (
+                      <button
+                        className="edit-button"
+                        onClick={() => handleSaveSubmit(product)}
+                      >
+                        Save
+                      </button>
+                    ) : (
+                      <LinkContainer
+                        to={`/products/edit/${product.product_info_id}`}
+                      >
+                        <button
+                          className="edit-button"
+                          onClick={() => editClickHandler(product)}
+                        >
+                          Edit
+                        </button>
+                      </LinkContainer>
+                    )}
+                  </td>
+                      </tr>)))}
+                     
+                    </tbody>
+                  </table>
+                 
+                </div>
+
+              </div>
+            </div>
       </div>{" "}
     </div>
   );
