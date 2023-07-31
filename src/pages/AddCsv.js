@@ -72,17 +72,28 @@ const changeHandler = (e) => {
         </div>
 </div>
       <div className="csv-side-div">
-        <div></div>
-        <img src={csvformat}></img>
-        <div style={{marginTop:'130px'}}
+        <div className='csv-look'>Expected Format For CSV</div>
+        <div style={{justifyContent:"center", display:'flex'}}>  <img src={csvformat} alt=''></img></div>
+      
+        <div style={{marginTop:'0px'}}
 ></div>
         <div className="message-loader">
-          {pop ? (
-            <Message variant="success">{pop.msg}</Message>
-          ) : error ? (
-            <Message variant="danger">{error}</Message>
-          ) : (
-            loading && <Loader />
+          {pop ? (<div style={{ display:'flex', justifyContent:'center', marginTop:'40px', position:'absolute', left: '50%', transform: 'translateX(-50%)'}}>
+            <Message variant="success">
+              {pop.msg}
+            </Message></div>
+          ) : error ? (<div style={{ display:'flex', justifyContent:'center',  marginTop:'40px', position:'absolute', left: '50%', transform: 'translateX(-50%)' }}>
+          
+            <Message variant="danger">
+              {error}
+              {/* hello eiie djsjdne */}
+              
+              </Message>
+            </div> ) : (
+          //  <div style={{marginLeft:'800px', zIndex:'0'}}>
+          //   <Loader />
+          //   </div>
+          null
           )}
         </div>
         <div className="div-div">
@@ -96,13 +107,14 @@ const changeHandler = (e) => {
           {csvfile ? (
             <button
               variant="light"
-              className="upload-button"
-              style={{ display: "block", marginLeft: "675px" }}
+              className="submit-button"
+              style={{ display: "block", marginLeft: "625px" }}
               onClick={handleOnSubmit}
             >
               UPLOAD CSV
             </button>
           ) : null}
+         <div style={{position:'relative', marginLeft:'500px', top:'-120px'}}> {loading && <Loader />}</div>
         </div>
       </div>
       </section>

@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
-import FormContainer from "../components/loginComponents/FormContainer";
-import { Form, Button, Row, Col } from "react-bootstrap";
-import { Typography, Box, useTheme } from "@mui/material";
-import { tokens } from "../theme";
+import { Form} from "react-bootstrap";
+
 import { useState } from "react";
-import Papa from "papaparse";
 import { useDispatch, useSelector } from "react-redux";
 import "./AddProduct.css";
 import Message from "../components/Message";
@@ -12,15 +9,11 @@ import Loader from "../components/Loader";
 import { clearupdate } from "../Redux/actions/productActions";
 import { formAddProduct } from "../Redux/actions/productActions";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 
 
 function AddProduct() {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
 
-  const [csvfile, setCsvFile] = useState(null);
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
   const [uploading, setUploading] = useState(false);
@@ -33,21 +26,15 @@ function AddProduct() {
     console.log("helloooooowepoew");
   }
   const pop = serverMsg;
-  // console.log("hey ther pop " + JSON.stringify(pop));
 
   const dispatch = useDispatch();
 
-  // const formSubmitHandler = (event) => {
-  //   event.preventDefault();
 
-  //   console.log(form)
-  // }
 
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(clearupdate());
-      // pop = false
-      // setErrors(false)
+    
     }, 5000);
 
     return () => {
@@ -55,8 +42,7 @@ function AddProduct() {
     };
   }, [pop, error]);
   useEffect(() => {
-    // This useEffect runs whenever imageCloud changes.
-    // Check if imageCloud is not empty and update form.image
+
     if (imageCloud) {
       setForm((prevForm) => ({
         ...prevForm,
@@ -298,8 +284,8 @@ function AddProduct() {
 
             <span
               className="choose-file-button"
-              style={{ paddingBottom: "50px",
-               textAlign:'center' }}
+              style={{ 
+               textAlign:'center', whiteSpace: "nowrap" }}
             >
                 {/* <Loader /> */}
               Choose Image
@@ -309,7 +295,7 @@ function AddProduct() {
           </div>
           
         </div>
-              <div class="text-center"><button type="submit" onClick={formSubmitHandler}>Send Message</button></div>
+              <div class="text-center"><button className="submit-button" onClick={formSubmitHandler}>Submit</button></div>
             </form>
 
           </div>

@@ -13,7 +13,7 @@ width: 1900px;
     box-shadow: 894px;
     /* position: fixed; */
     z-index: 3;
-    width: 1900px;
+    width: 100%;
     }
 
 .name-shop {
@@ -24,7 +24,7 @@ width: 1900px;
 }
 
 .divy {
-    padding-top: 15px;
+    padding-top: 10px;
     display: flex;
 }
 
