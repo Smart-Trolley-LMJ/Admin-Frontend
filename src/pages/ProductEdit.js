@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
 // import Loader from '../components/Loader'
 // import Message from '../components/Message'
 import FormContainer from '../components/loginComponents/FormContainer'
 // import { getUserDetails, updateUser } from '../actions/userActions'
 // import { USER_UPDATE_RESET } from '../constants/userConstants'
 
-function ProductEdit({ match, history }) {
+function ProductEdit() {
 
     // const userId = match.params.id
 

@@ -1,9 +1,8 @@
 import React, { useEffect, useState  } from "react";
-import logo192 from "../images/logo192.png";
-import { Card } from "react-bootstrap";
+
 import { useDispatch, useSelector } from "react-redux";
 import { listTransactions } from "../Redux/actions/productActions";
-import { Typography, Box, useTheme, IconButton } from "@mui/material";
+import { Box, useTheme, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import { tokens } from "../theme";
@@ -31,7 +30,7 @@ function CartTransactions() {
 
   useEffect(() => {
     dispatch(listTransactions());
-  }, []);
+  }, [dispatch]);
 
   const { transactions, error, loading } = useSelector(
     (state) => state.transactionsList
@@ -100,18 +99,18 @@ function CartTransactions() {
                 data-aos="zoom-in"
                 data-aos-delay="100"
               >
-                <div class="icon-box">
+                <div class="icon-box" style={{backgroundColor:'#f6f9ff'}}>
                   <h4>
-                    <a style={{textDecoration:'none'}} href="">{product.mobile_number}</a>
+                    <div style={{textDecoration:'none'}} >{product.mobile_number}</div>
                   </h4>
                   <div class="left-right-box">
-                    <div class="left-box">
+                    <div class="left-box" style={{backgroundColor:'#f6f9ff'}}>
                       <h5>Mobile Number:</h5>
                       <h5>Amount:</h5>
                       <h5>Date Of Transaction:</h5>
                       <h5>User ID:</h5>
                     </div>
-                    <div class="right-box" style={{lineHeight:'4.5'}}>
+                    <div class="right-box" style={{lineHeight:'4.5', backgroundColor:'#f6f9ff'}}>
                     <h6 style={{lineHeight:'1.5'}}>+{product.mobile_number}</h6>
                       <h6 style={{lineHeight:'1.5'}}>{product.amount}¢</h6>
                       <h6 style={{lineHeight:'1.5'}}>{product.date_created}</h6>
@@ -121,22 +120,7 @@ function CartTransactions() {
                 </div>
               </div>
 
-              {/* <div
-                class="col-lg-6 col-md-6 d-flex align-items-stretch mt-4 mt-md-0"
-                data-aos="zoom-in"
-                data-aos-delay="200"
-              >
-                <div class="icon-box">
-                  <h4>
-                    <a href="">3829928332</a>
-                  </h4>
-                  <p>
-                    Choose this to upload a CSV file containing details of
-                    products
-                  </p>
-                </div>
-              </div> */
-              }
+            
             </div>
 ))}
           </div>

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { LinkContainer } from "react-router-bootstrap";
-import { Table, Button, Card, Image } from "react-bootstrap";
-import ProductTest from "../ProductTest";
 import { tokens } from "../theme";
-import { Typography, Box, useTheme, IconButton } from "@mui/material";
+import { Box, useTheme, IconButton } from "@mui/material";
 import "./ProductPage.css";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../Redux/actions/productActions";
@@ -14,7 +12,6 @@ import Loader from "../components/Loader";
 import { editProduct } from "../Redux/actions/productActions";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import ProductDetails from "./ProductDetails";
 
 // import InputBase from '@mui/material'
 // import Search
@@ -27,11 +24,11 @@ function ProductPage() {
     (state) => state.productList
   );
   // const products = ProductTest
-  const [edit, setEdit] = useState(true);
   const [filterText, setFilterText] = useState("");
   const [form, setForm] = useState({});
-  const [uploading, setUploading] = useState(false);
+  // const [uploading, setUploading] = useState(false);
   const [imageCloud, setImageCloud] = useState("");
+  const setUploading = false
   // console.log(JSON.stringify(products))
   // const userLogin = useSelector(state => state.userLogin)
 
@@ -43,7 +40,7 @@ function ProductPage() {
 
   useEffect(() => {
     dispatch(listProducts());
-  }, []);
+  }, [dispatch]);
   // console.log("heyyy this is me " + [product.name]);
   // console.log("this is products " + products)
 
@@ -58,24 +55,24 @@ function ProductPage() {
   };
 
   // Function to handle changes in the input fields
-  const handleChange = (field, e, product) => {
-    const { name, value } = e.target;
-    setEditing((prevState) => ({
-      ...prevState,
-      [product.name]: {
-        ...prevState[product.name],
-        [name]: value,
-      },
-    }));
-    setForm((prevForm) => ({
-      ...prevForm,
-      [product.name]: {
-        ...prevForm[product.name],
-        [name]: value,
-      },
-      // [product.product_info_id] : product.product_info_id
-    }));
-  };
+  // const handleChange = (field, e, product) => {
+  //   const { name, value } = e.target;
+  //   setEditing((prevState) => ({
+  //     ...prevState,
+  //     [product.name]: {
+  //       ...prevState[product.name],
+  //       [name]: value,
+  //     },
+  //   }));
+  //   setForm((prevForm) => ({
+  //     ...prevForm,
+  //     [product.name]: {
+  //       ...prevForm[product.name],
+  //       [name]: value,
+  //     },
+  //     // [product.product_info_id] : product.product_info_id
+  //   }));
+  // };
 
   // Function to handle the submit button click
   const handleSaveSubmit = (product) => {
@@ -435,7 +432,7 @@ function ProductPage() {
                       <tr>
                         
                         <th scope="row">
-                          <a href="#">
+                          <div>
                             {" "}
                             {editing[product.name] ? (
                               <input
@@ -450,12 +447,12 @@ function ProductPage() {
                                 <div className="product-image-container">
                                   <img
                                     src={`${product.image_url}`}
-                                    className="product-image"
+                                    className="product-image" alt=""
                                   ></img>
                                 </div>
                               </LinkContainer>
                             )}
-                          </a>
+                          </div>
                         </th>
                         <td>
                           <span href="#" class="text-primary fw-bold">

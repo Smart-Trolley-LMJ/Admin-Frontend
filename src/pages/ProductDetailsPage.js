@@ -1,9 +1,7 @@
 import React from 'react'
-import { LinkContainer } from 'react-router-bootstrap'
-import { Table, Button, Card } from 'react-bootstrap'
-import ProductTest from '../ProductTest'
+import { Table} from 'react-bootstrap'
 import { tokens } from '../theme'
-import { Typography, Box, useTheme } from "@mui/material";
+import { Typography, useTheme } from "@mui/material";
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductByName } from '../Redux/actions/productActions'
 import { useEffect } from 'react'

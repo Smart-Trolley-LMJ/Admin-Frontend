@@ -4,7 +4,6 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { useState, useEffect } from "react";
 import { addProduct } from "../Redux/actions/productActions";
-import { Link } from "react-router-dom";
 import { clearupdate } from '../Redux/actions/productActions';
 import { LinkContainer } from 'react-router-bootstrap';
 import csvformat from '../images/csvformat.png'
@@ -22,6 +21,9 @@ function AddCsv() {
 
   const [csvfile, setCsvFile] = useState(null);
 
+  const dispatch = useDispatch();
+
+
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(clearupdate());
@@ -32,10 +34,9 @@ function AddCsv() {
     return () => {
       clearTimeout(timer);
     };
-  }, [pop, error]);
+  }, [pop, error, dispatch]);
 
 
-  const dispatch = useDispatch();
 
 
 

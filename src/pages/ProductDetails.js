@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import { Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import "react-bootstrap";
 import { useParams } from "react-router-dom";
 import "./ProductDetails.css";
@@ -15,7 +14,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     dispatch(listProducts());
-  }, []);
+  }, [dispatch]);
 
   const { products, error, loading } = useSelector(
     (state) => state.productList
@@ -59,7 +58,7 @@ const ProductDetails = () => {
        <div class="container" data-aos="fade-up">
      
                           
-         <div class="section-title">
+         <div class="section-title" style={{marginTop:'20px'}}>
            <h2>Details</h2>
            <p>{filteredItems.name}</p>
          </div>

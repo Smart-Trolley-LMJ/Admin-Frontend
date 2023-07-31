@@ -22,7 +22,7 @@ function AddChoice() {
           <div class="col-lg-6 col-md-6 d-flex align-items-stretch mr-2 " style={{marginRight:'20px'}} data-aos="zoom-in" data-aos-delay="100">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="">Form</a></h4>
+              <h4><div >Form</div></h4>
               <p>Choose this if you want to type in the details of a product</p>
             </div>
           </div>
@@ -33,7 +33,7 @@ function AddChoice() {
           <div class="col-lg-6 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
             <div class="icon-box">
               <div class="icon"><i class="bx bx-file"></i></div>
-              <h4><a href="">CSV</a></h4>
+              <h4><div >CSV</div></h4>
               <p>Choose this to upload a CSV file containing details of products</p>
             </div>
           </div>

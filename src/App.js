@@ -1,9 +1,7 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
-import Dashboard from "./scenes/dashboard";
-import Team from "./scenes/team";
+
 import Invoices from "./scenes/invoices";
 import AddProduct from "./pages/AddProduct";
 import Bar from "./scenes/bar";
@@ -14,15 +12,12 @@ import FAQ from "./scenes/faq";
 import Geography from "./scenes/geography";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
-import Calendar from "./scenes/calendar/calendar";
 import LoginPage from './pages/LoginPage';
 import Header from "./components//Header";
 import ProductPage from "./pages/ProductPage";
-import ProductEditScreen from "./scenes/producteditscreen/ProductEditScreen";
-import ProductDetailsPage from "./pages/ProductDetailsPage";
+
 import CartTransactions from "./pages/CartTransactions";
 import ProductEdit from "./pages/ProductEdit";
-import { useSelector } from "react-redux";
 import './App.css'
 import ProductDetails from "./pages/ProductDetails";
 import AddChoice from "./pages/AddChoice";
@@ -30,10 +25,11 @@ import AddCsv from "./pages/AddCsv";
 
 function App() {
   const [theme, colorMode] = useMode();
-  const [isSidebar, setIsSidebar] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // const [isSidebar, setIsSidebar] = useState(true);
+  const isSidebar = true;
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const userLogin = useSelector(state => state.userLogin)
+  // const userLogin = useSelector(state => state.userLogin)
   // const { error, loading, userInfo } = userLogin
 
   // useEffect(() => {

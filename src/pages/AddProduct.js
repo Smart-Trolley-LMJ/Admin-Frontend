@@ -40,7 +40,7 @@ function AddProduct() {
     return () => {
       clearTimeout(timer);
     };
-  }, [pop, error]);
+  }, [pop, error, dispatch]);
   useEffect(() => {
 
     if (imageCloud) {
@@ -206,7 +206,7 @@ function AddProduct() {
 
           <div class="col-lg-8 mt-5 mt-lg-0">
 
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form class="php-email-form">
               <div class="row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Product Name" isInvalid={!!errors.name} required  onChange={(e) => {
@@ -261,9 +261,13 @@ function AddProduct() {
               }}
             >
               <option>Select a category</option>
-              <option>Drinks</option>
-              <option>Food</option>
-              <option>Soap</option>
+              <option>Beverages</option>
+              <option>Alcoholic Drinks</option>
+
+              <option>Non-Alcoholic Drinks</option>
+              <option>Gadgets and Electronics</option>
+              <option>Cosmetics</option>
+              <option>Health Care</option>
             </Form.Select>
           </Form.Group>
 
