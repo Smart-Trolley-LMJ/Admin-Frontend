@@ -26,7 +26,7 @@ console.log("from the store products" + newproduct)
 
     useEffect(() => {
         dispatch(getProductByName(id))
-    }, [])
+    }, [dispatch])
 
     // console.log("this is product" + product)
 

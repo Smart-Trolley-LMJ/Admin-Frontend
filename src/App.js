@@ -18,6 +18,7 @@ import ProductPage from "./pages/ProductPage";
 
 import CartTransactions from "./pages/CartTransactions";
 import ProductEdit from "./pages/ProductEdit";
+import { useSelector } from "react-redux";
 import './App.css'
 import ProductDetails from "./pages/ProductDetails";
 import AddChoice from "./pages/AddChoice";
@@ -26,10 +27,9 @@ import AddCsv from "./pages/AddCsv";
 function App() {
   const [theme, colorMode] = useMode();
   // const [isSidebar, setIsSidebar] = useState(true);
-  const isSidebar = true;
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // const userLogin = useSelector(state => state.userLogin)
+const isSidebar = true
+  useSelector(state => state.userLogin)
   // const { error, loading, userInfo } = userLogin
 
   // useEffect(() => {
@@ -78,7 +78,7 @@ console.log('this is theme ' +  colorMode)
               <Route path="/products/edit/:id" element={<ProductPage />} />
               {/* <Route path="/products/:id/details" element={<ProductDetailsPage />} /> */}
               <Route path="/carttransactions" element={<CartTransactions />} />
-              <Route path="/login" element={<LoginPage />} />
+             {!userInfo ? <Route path="/login" element={<LoginPage />} /> : null }
              
 
             </Routes>
