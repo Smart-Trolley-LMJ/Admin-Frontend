@@ -1,11 +1,11 @@
 .allproduct-div{
-  background-color: #f6f9ff;
+  background-color: white;
   padding-top: 30px;
 }
 
 .product-image-container {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     overflow: hidden;
   }
   
@@ -15,14 +15,28 @@
   }
 
   .edit-button {
-    width: 60px;
+    /* width: 60px;
     border-radius: 10px;
-    border: none;
+    border: none; */
+    background-color: white;
+
+    font-family: "Raleway", sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 8px 28px;
+    border-radius: 4px;
+    transition: 0.5s;
+    /* margin-top: 10px; */
+    border: 2px solid #1b52b9;
+    color: #1b52b9;
   }
 
   .edit-button:hover {
-    background-color: grey;
-  }
+    background: #1b52b9;
+    border-color: #1b52b9;
+    color: white;  }
 
   .message-product {
     padding-left: 500px;
@@ -37,5 +51,10 @@
     cursor: pointer;
     color: blue;
     font-weight: 900;
+    font-size: 15px;
+    padding: 10px;
   }
 
+  .span-caret-name:hover {
+    color: rgb(103, 103, 238); /* Add any styles you want when hovering */
+  }

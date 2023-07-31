@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 import { addProduct } from "../Redux/actions/productActions";
 import { Link } from "react-router-dom";
 import { clearupdate } from '../Redux/actions/productActions';
+import { LinkContainer } from 'react-router-bootstrap';
+import csvformat from '../images/csvformat.png'
 
 
 
@@ -52,10 +54,28 @@ const changeHandler = (e) => {
 
   return (
     <div>
-      <div className='pb-2'>
-          <Link to='/addproduct' className="btn btn-dark btn-lg p-3">Go back</Link>
+       <section id="services" class="services"><LinkContainer
+                              to={`/addproduct`}
+                            >
+                              <button
+                                className="go-back-button"
+                               style={{marginTop:'0px'}}
+                              >
+                                Go Back
+                              </button>
+                            </LinkContainer>
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>ADD A CSV</h2>
+          <p>CSV OPTION</p>
         </div>
+</div>
       <div className="csv-side-div">
+        <div></div>
+        <img src={csvformat}></img>
+        <div style={{marginTop:'130px'}}
+></div>
         <div className="message-loader">
           {pop ? (
             <Message variant="success">{pop.msg}</Message>
@@ -85,6 +105,7 @@ const changeHandler = (e) => {
           ) : null}
         </div>
       </div>
+      </section>
     </div>
   )
 }

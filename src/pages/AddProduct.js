@@ -13,6 +13,8 @@ import { clearupdate } from "../Redux/actions/productActions";
 import { formAddProduct } from "../Redux/actions/productActions";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
+
 
 function AddProduct() {
   const theme = useTheme();
@@ -171,112 +173,21 @@ function AddProduct() {
   return (
     <div>
       <div className="pb-2">
-        <Link to="/addproduct" className="btn btn-dark btn-lg p-3">
-          Go back
-        </Link>
-      </div>
-      {/* <div className="form-side-div">
-        <h5>Product Name</h5>
-        <div className="input-div">
-          <input
-            className="input-field"
-            type="text"
-            placeholder="Enter Name"
-            onChange={(e) => {
-              setField("name", e.target.value);
-            }}
-            // value={'hellods'}
-          />
-        </div>
-        Product Price
-        <div div className="input-div">
-          <input
-            className="input-field"
-            type="text"
-            placeholder="Enter Price"
-            onChange={(e) => {
-              setField("price", e.target.value);
-            }}
-            // value={'hellods'}
-          />
-        </div>
-        Product Quantity
-        <div div className="input-div">
-          <input
-            className="input-field"
-            type="text"
-            placeholder="Enter Quantity"
-            // value={'hellods'}
-            onChange={(e) => {
-              setField("quantity", e.target.value);
-            }}
-          />
-        </div>
-        Product Weight
-        <div div className="input-div">
-          <input
-            className="input-field"
-            type="text"
-            placeholder="Enter Weight"
-            // value={'hellods'}
-            onChange={(e) => {
-              setField("weight", e.target.value);
-            }}
-          />
-        </div>
-        Product Description
-        <div div className="input-div">
-          <input
-            className="input-field"
-            type="text"
-            placeholder="Enter Description"
-            // value={'hellods'}
-            onChange={(e) => {
-              setField("description", e.target.value);
-            }}
-          />
-        </div>
-        <div className="input-div">
-          <Form.Group controlId="item">
-            <Form.Label>Item Type</Form.Label>
-            <Form.Select type="submit" style={{width:'130px',height:'30px' }}
-              value={form.item}
-              isInvalid={!!errors.item}
-              placeholder="Select category"
-              onChange={(e) => {
-                setField("category", e.target.value);
-              }}
-            >
-              <option>Select a category</option>
-              <option>Drinks</option>
-              <option>Food</option>
-              <option>Soap</option>
-            </Form.Select>
-          </Form.Group>
-        </div>
-        <div div className="input-div">
-          <label class="choose-image-container">
-            <input
-              type="file"
-              //  onChange={changeHandler}
-              style={{}}
-              onChange={uploadFileHandler}
-            />
-            {uploading && <Loader />}
-
-            <span
-              className="choose-file-button"
-              style={{ paddingBottom: "50px" }}
-            >
-              Choose Image
-            </span>
-          </label>
-        </div>
-        <button onClick={formSubmitHandler}>Submit Form</button>
-      </div> */}
+       
+      </div> 
+     
 
 
-      <section id="contact" class="contact">
+      <section id="contact" class="contact"><LinkContainer
+                              to={`/addproduct`}
+                            >
+                              <button
+                                className="go-back-button"
+                               style={{margin:'130px'}}
+                              >
+                                Go Back
+                              </button>
+                            </LinkContainer>
       <div class="container" data-aos="fade-up" style={{marginLeft:'420px'}}>
 
         <div class="section-title">

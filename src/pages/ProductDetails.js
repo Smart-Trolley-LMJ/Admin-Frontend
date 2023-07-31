@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../Redux/actions/productActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import { LinkContainer } from "react-router-bootstrap";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
@@ -45,8 +46,19 @@ const ProductDetails = () => {
       ) : filteredItems ? (
        
         <section id="services" class="services">
+            <LinkContainer
+                              to={`/products/`}
+                            >
+                              <button
+                                className="go-back-button"
+                               
+                              >
+                                Go Back
+                              </button>
+                            </LinkContainer>
        <div class="container" data-aos="fade-up">
- 
+     
+                          
          <div class="section-title">
            <h2>Details</h2>
            <p>{filteredItems.name}</p>

@@ -13,9 +13,8 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { editProduct } from "../Redux/actions/productActions";
 import { useParams } from "react-router-dom";
-import axios from 'axios'
-import ProductDetails from './ProductDetails'
-
+import axios from "axios";
+import ProductDetails from "./ProductDetails";
 
 // import InputBase from '@mui/material'
 // import Search
@@ -31,9 +30,9 @@ function ProductPage() {
   const [edit, setEdit] = useState(true);
   const [filterText, setFilterText] = useState("");
   const [form, setForm] = useState({});
-  const [uploading, setUploading] = useState(false)
-  const [imageCloud, setImageCloud] = useState('')
-// console.log(JSON.stringify(products))
+  const [uploading, setUploading] = useState(false);
+  const [imageCloud, setImageCloud] = useState("");
+  // console.log(JSON.stringify(products))
   // const userLogin = useSelector(state => state.userLogin)
 
   const theme = useTheme();
@@ -134,42 +133,43 @@ function ProductPage() {
     }
   }, [imageCloud]);
 
-  const preset_key = 'ff2nd3vj'
-  const cloud_name = 'drvu9dhnp'
+  const preset_key = "ff2nd3vj";
+  const cloud_name = "drvu9dhnp";
 
   const uploadFileHandler = async (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files[0];
     // console.log(file)
-    const formData = new FormData()
+    const formData = new FormData();
 
-    formData.append('file', file)
-    formData.append('upload_preset', preset_key)
+    formData.append("file", file);
+    formData.append("upload_preset", preset_key);
 
-    setUploading(true)
+    setUploading(true);
 
     try {
-        const config = {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        }
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
 
-        const { data } = await axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, formData, config)
+      const { data } = await axios.post(
+        `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
+        formData,
+        config
+      );
 
-console.log(data.url)
-        setImageCloud(data.url)
-        setUploading(false)
-
+      console.log(data.url);
+      setImageCloud(data.url);
+      setUploading(false);
     } catch (error) {
-        setUploading(false)
+      setUploading(false);
     }
-}
-
-
+  };
 
   return (
     <div className="allproduct-div">
-{/* <ProductDetails name='tripp'/> */}
+      {/* <ProductDetails name='tripp'/> */}
       {/* <Typography
         variant="h2"
         color={colors.grey[100]}
@@ -178,23 +178,27 @@ console.log(data.url)
       >
         ALL PRODUCTS IN THE STORE
       </Typography> */}
-      <div  >
-        <div style={{marginLeft:'18px'}}>
-        <Box
-          display="flex"
-          backgroundColor={colors.primary[400]}
-          borderRadius="3px"
-          style={{ width: "300px" }}
-        >
-          <InputBase
-            sx={{ ml: 2, flex: 1 }}
-            placeholder="Search"
-            onChange={handlesearch}
-          />
-          <IconButton type="button" sx={{ p: 1 }} style={{marginRight:'10px'}}>
-            <SearchIcon style={{marginLeft:'10px'}}/>
-          </IconButton>
-        </Box>
+      <div>
+        <div style={{ marginLeft: "18px" }}>
+          <Box
+            display="flex"
+            backgroundColor={colors.primary[400]}
+            borderRadius="3px"
+            style={{ width: "300px", border: "1px solid #ccc" }}
+          >
+            <InputBase
+              sx={{ ml: 2, flex: 1 }}
+              placeholder="Search"
+              onChange={handlesearch}
+            />
+            <IconButton
+              type="button"
+              sx={{ p: 1 }}
+              style={{ marginRight: "10px" }}
+            >
+              <SearchIcon style={{ marginLeft: "10px" }} />
+            </IconButton>
+          </Box>
         </div>
         {/* <Table
           striped
@@ -367,14 +371,13 @@ console.log(data.url)
             )}
           </tbody>
         </Table> */}
-        <div class="col-12" style={{marginTop:"20px"}}>
-        <div className="message-product">
-              {error && <Message variant="danger">{error}</Message>}
-              {loading && <Loader />}
-            </div>
-              <div class="card top-selling overflow-auto">
-
-                {/* <div class="filter">
+        <div class="col-12" style={{ marginTop: "20px" }}>
+          <div className="message-product">
+            {error && <Message variant="danger">{error}</Message>}
+            {loading && <Loader />}
+          </div>
+          <div class="card top-selling overflow-auto">
+            {/* <div class="filter">
                   <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <li class="dropdown-header text-start">
@@ -386,172 +389,225 @@ console.log(data.url)
                     <li><a class="dropdown-item" href="#">This Year</a></li>
                   </ul>
                 </div> */}
-                
 
-                <div class="card-body pb-0">
-                  <h5 class="card-title">Our Products <span>| Today</span></h5>
-                
-                  <table class="table table-borderless" striped>
-                    <thead>
-                      <tr>
-                        <th scope="col">Image</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Price</th>
+            <div
+              class="card-body pb-0"
+              style={{backgroundColor:'#f6f9ff'}}
+            >
+              <h3 class="card-title">
+                Our Products <span>| Today</span>
+              </h3>
 
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Weight</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      
-                  
-            {products && !loading && !filteredItems.length && (
-              <div>
-                There are no items to display adjust your filter criteria
-              </div>
-            )}
-            {error ? (
-              <Message variant="danger">{error}</Message>
-            ) : (
-              itemsToDisplay.map((product) => (
-                      <tr>
-                        <th scope="row"><a href="#">   {editing[product.name] ? (
-                    
-                    <input type="file"
-                     style={{}}
-                     onChange={uploadFileHandler}
-        
-                      />
+              <table class="table table-borderless" striped>
+                <thead>
+                  <tr>
+                    <th scope="col">
+                      <h5>Image</h5>
+                    </th>
+                    <th scope="col">
+                      <h5>Product</h5>
+                    </th>
+                    <th scope="col">
+                      <h5>Category</h5>
+                    </th>
+                    <th scope="col">
+                      <h5>Price(¢)</h5>
+                    </th>
 
+                    <th scope="col">
+                      <h5>Quantity</h5>
+                    </th>
+                    <th scope="col">
+                      <h5>Weight(g)</h5>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {products && !loading && !filteredItems.length && (
+                    <div>
+                      There are no items to display adjust your filter criteria
+                    </div>
+                  )}
+                  {error ? (
+                    <Message variant="danger">{error}</Message>
                   ) : (
-              
-                    <LinkContainer to={`/products/${product.product_info_id}/details`}>
-                      <div className="product-image-container">
-                      <img src={`${product.image_url}`} className="product-image"></img>
+                    itemsToDisplay.map((product) => (
+                      <tr>
+                        
+                        <th scope="row">
+                          <a href="#">
+                            {" "}
+                            {editing[product.name] ? (
+                              <input
+                                type="file"
+                                style={{}}
+                                onChange={uploadFileHandler}
+                              />
+                            ) : (
+                              <LinkContainer
+                                to={`/products/${product.product_info_id}/details`}
+                              >
+                                <div className="product-image-container">
+                                  <img
+                                    src={`${product.image_url}`}
+                                    className="product-image"
+                                  ></img>
+                                </div>
+                              </LinkContainer>
+                            )}
+                          </a>
+                        </th>
+                        <td>
+                          <span href="#" class="text-primary fw-bold">
+                            {" "}
+                            <LinkContainer
+                              to={`/products/${product.product_info_id}/details`}
+                            >
+                              <span className="span-caret-name">
+                                {product.name}
+                              </span>
+                            </LinkContainer>
+                          </span>
+                        </td>
 
-                      </div>
-                     </LinkContainer>
+                        <td class="fw-bold">
+                          {" "}
+                          {editing[product.name] ? (
+                            <input
+                              type="text"
+                              name="category"
+                              value={
+                                // editing[product.name]?.category || product.category
+                                form.category
+                              }
+                              onChange={(e) => {
+                                setField("category", e.target.value);
+                              }}
 
-                  )}</a></th>
-                        <td><span href="#" class="text-primary fw-bold" > <LinkContainer to={`/products/${product.product_info_id}/details`}>
-                      <span className="span-caret-name">{product.name}</span>
-                    </LinkContainer></span></td>
-                       
-                        <td class="fw-bold">  {editing[product.name] ? (
-                      <input
-                        type="text"
-                        name="category"
-                        value={
-                          // editing[product.name]?.category || product.category
-                          form.category
-                        }
-                        onChange={(e) => {
-                          setField("category", e.target.value);
-                        }}
+                              // onChange={(e) =>{
+                              //   setField('category', e.target.value)
+                              // }}
+                            />
+                          ) : (
+                            <LinkContainer
+                              to={`/products/${product.product_info_id}/details`}
+                            >
+                              <span className="span-caret">
+                                {product.category}
+                              </span>
+                            </LinkContainer>
+                          )}
+                        </td>
+                        <td>
+                          {" "}
+                          {editing[product.name] ? (
+                            <input
+                              type="text"
+                              name="quantity"
+                              value={
+                                // editing[product.name]?.quantity ||
+                                form.quantity
+                              }
+                              // onChange={(e) => handleChange(e, product)}
 
-                        // onChange={(e) =>{
-                        //   setField('category', e.target.value)
-                        // }}
-                      />
-                    ) : (
-                      <LinkContainer to={`/products/${product.product_info_id}/details`}>
-                        <span className="span-caret">{product.category}</span>
-                      </LinkContainer>
-                    )}</td>
-                        <td> {editing[product.name] ? (
-                      <input
-                        type="text"
-                        name="quantity"
-                        value={
-                          // editing[product.name]?.quantity ||
-                          form.quantity
-                        }
-                        // onChange={(e) => handleChange(e, product)}
+                              onChange={(e) => {
+                                setField("quantity", e.target.value);
+                              }}
+                            />
+                          ) : (
+                            <LinkContainer
+                              to={`/products/${product.product_info_id}/details`}
+                            >
+                              <span className="span-caret">
+                                {product.quantity}
+                              </span>
+                            </LinkContainer>
+                          )}
+                        </td>
+                        <td>
+                          {editing[product.name] ? (
+                            <input
+                              type="text"
+                              name="price"
+                              value={
+                                // editing[product.name]?.price || product.price
+                                form.price
+                              }
+                              onChange={(e) => {
+                                setField("price", e.target.value);
+                              }}
 
-                        onChange={(e) => {
-                          setField("quantity", e.target.value);
-                        }}
-                      />
-                    ) : (
-                      <LinkContainer to={`/products/${product.product_info_id}/details`}>
-                        <span className="span-caret">{product.quantity}</span>
-                      </LinkContainer>
-                    )}</td>
-                    <td>
-                    {editing[product.name] ? (
-                      <input
-                        type="text"
-                        name="price"
-                        value={
-                          // editing[product.name]?.price || product.price
-                          form.price
-                        }
-                        onChange={(e) => {
-                          setField("price", e.target.value);
-                        }}
+                              // onChange={(e) =>{
+                              //   setField('price', e.target.value)
+                              // }}
+                            />
+                          ) : (
+                            <LinkContainer
+                              to={`/products/${product.product_info_id}/details`}
+                            >
+                              <span className="span-caret">
+                                {product.price}
+                              </span>
+                            </LinkContainer>
+                          )}
+                        </td>
+                        <td>
+                          {" "}
+                          {editing[product.name] ? (
+                            <input
+                              type="text"
+                              name="weight"
+                              value={
+                                // editing[product.name]?.weight || product.weight
+                                form.weight
+                              }
+                              onChange={(e) => {
+                                setField("weight", e.target.value);
+                              }}
 
-                        // onChange={(e) =>{
-                        //   setField('price', e.target.value)
-                        // }}
-                      />
-                    ) : (
-                      <LinkContainer to={`/products/${product.product_info_id}/details`}>
-                        <span className="span-caret">{product.price}</span>
-                      </LinkContainer>
-                    )}
-                    </td>
-                    <td> {editing[product.name] ? (
-                      <input
-                        type="text"
-                        name="weight"
-                        value={
-                          // editing[product.name]?.weight || product.weight
-                          form.weight
-                        }
-                        onChange={(e) => {
-                          setField("weight", e.target.value);
-                        }}
-
-                        // onChange={(e) =>{
-                        //   setField('weight', e.target.value)
-                        // }}
-                      />
-                    ) : (
-                      <LinkContainer to={`/products/${product.product_info_id}/details`}>
-                        <span className="span-caret">{product.weight}</span>
-                      </LinkContainer>
-                    )}</td>
-                     <td>
-                    {editing[product.name] ? (
-                      <button
-                        className="edit-button"
-                        onClick={() => handleSaveSubmit(product)}
-                      >
-                        Save
-                      </button>
-                    ) : (
-                      <LinkContainer
-                        to={`/products/edit/${product.product_info_id}`}
-                      >
-                        <button
-                          className="edit-button"
-                          onClick={() => editClickHandler(product)}
-                        >
-                          Edit
-                        </button>
-                      </LinkContainer>
-                    )}
-                  </td>
-                      </tr>)))}
-                     
-                    </tbody>
-                  </table>
-                 
-                </div>
-
-              </div>
+                              // onChange={(e) =>{
+                              //   setField('weight', e.target.value)
+                              // }}
+                            />
+                          ) : (
+                            <LinkContainer
+                              to={`/products/${product.product_info_id}/details`}
+                            >
+                              <span className="span-caret">
+                                {product.weight}
+                              </span>
+                            </LinkContainer>
+                          )}
+                        </td>
+                        <td>
+                          {editing[product.name] ? (
+                            <button
+                              className="edit-button"
+                              onClick={() => handleSaveSubmit(product)}
+                            >
+                              Save
+                            </button>
+                          ) : (
+                            <LinkContainer
+                              to={`/products/edit/${product.product_info_id}`}
+                            >
+                              <button
+                                className="edit-button"
+                                onClick={() => editClickHandler(product)}
+                              >
+                                Edit
+                              </button>
+                            </LinkContainer>
+                          )}
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
             </div>
+          </div>
+        </div>
       </div>{" "}
     </div>
   );
