@@ -395,8 +395,8 @@ function ProductPage() {
                 Our Products <span>| Today</span>
               </h3>
 
-              <table class="table table-borderless" striped>
-                <thead>
+              <table class="table table-border" striped>
+                <thead class="table table-borderless">
                   <tr>
                     <th scope="col">
                       <h5>Image</h5>
@@ -584,6 +584,9 @@ function ProductPage() {
                               </span>
                             </LinkContainer>
                           )}
+                        </td>
+                        <td>{ product.quantity === 0 ? (<div style={{color:'green', fontSize:'15px'}}>Out Of stock!</div>) : product.quantity < 5 ? (<div style={{color:'red', fontSize:'15px'}}>Stock Almost Empty</div>) : (<div style={{color:'green', fontSize:'15px'}}>In Stock</div>)}
+                          
                         </td>
                         <td>
                           {editing[product.name] ? (

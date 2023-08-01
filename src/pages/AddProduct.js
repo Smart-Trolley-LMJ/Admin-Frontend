@@ -12,6 +12,8 @@ import axios from "axios";
 import { LinkContainer } from "react-router-bootstrap";
 
 
+
+
 function AddProduct() {
 
   const [form, setForm] = useState({});
@@ -155,7 +157,12 @@ function AddProduct() {
       setUploading(false);
     }
   };
-  console.log("this is image " + imageCloud);
+  // console.log("this is image " + imageCloud);
+
+
+console.log()
+
+
   return (
     <div>
       <div className="pb-2">
@@ -242,12 +249,17 @@ function AddProduct() {
               setField("description", e.target.value);
             }}></textarea>
               </div>
-              <div class="my-3">
+              <div>
+                <input type="date"  onChange={(e) => {
+              setField("date", e.target.value);}}/>
+                
+              </div>
+              {/* <div class="my-3">
                 <div class="loading">Loading</div>
                 <div class="error-message"></div>
                 <div class="sent-message">Your message has been sent. Thank you!</div>
 
-              </div>
+              </div> */}
               <div className="input-div">
                 <div style={{display:'flex'}}>
                   <Form.Group controlId="item">

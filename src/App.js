@@ -23,6 +23,7 @@ import './App.css'
 import ProductDetails from "./pages/ProductDetails";
 import AddChoice from "./pages/AddChoice";
 import AddCsv from "./pages/AddCsv";
+import Testdate from "./pages/Testdate";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -64,6 +65,7 @@ console.log('this is theme ' +  colorMode)
               <Route path="/addproduct/form" element={<AddProduct />} />
               <Route path="/addproduct" element={<AddChoice />} />
               <Route path="/addproduct/csv" element={<AddCsv />} />
+              <Route path="/testdate" element={<Testdate />} />
 
               <Route path="/invoices" element={<Invoices />} />
               <Route path="/form" element={<Form />} />
