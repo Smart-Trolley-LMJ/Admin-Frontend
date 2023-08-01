@@ -79,7 +79,7 @@ function LoginPage({ location, history, handleLogin }) {
                 <h5
                   style={{
                     height: "91px",
-                    marginLeft: "-115px",
+                    marginLeft: "-145px",
                     top: "-113px",
                     position: "absolute",
                     color: "white",
@@ -90,7 +90,7 @@ function LoginPage({ location, history, handleLogin }) {
                 <h5
                   style={{
                     height: "91px",
-                    marginLeft: "-115px",
+                    marginLeft: "-145px",
                     top: "-66px",
                     position: "absolute",
                     color: "white",
