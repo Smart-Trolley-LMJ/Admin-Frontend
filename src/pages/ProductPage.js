@@ -408,11 +408,11 @@ function ProductPage() {
                       <h5>Category</h5>
                     </th>
                     <th scope="col">
-                      <h5>Price(¢)</h5>
+                      <h5>Quantity</h5>
                     </th>
 
                     <th scope="col">
-                      <h5>Quantity</h5>
+                      <h5>Price(¢)</h5>
                     </th>
                     <th scope="col">
                       <h5>Weight(g)</h5>
@@ -497,7 +497,7 @@ function ProductPage() {
                         </td>
                         <td>
                           {" "}
-                          {editing[product.name] ? (
+                          {/* {editing[product.name] ? (
                             <input
                               type="text"
                               name="quantity"
@@ -519,7 +519,16 @@ function ProductPage() {
                                 {product.quantity}
                               </span>
                             </LinkContainer>
-                          )}
+                          )} */}
+                          <span>
+                          <LinkContainer
+                              to={`/products/${product.product_info_id}/details`}
+                            >
+                              <span className="span-caret">
+                                {product.quantity}
+                              </span>
+                            </LinkContainer>
+                          </span>
                         </td>
                         <td>
                           {editing[product.name] ? (
