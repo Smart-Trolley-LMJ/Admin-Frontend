@@ -616,7 +616,7 @@ function ProductPage() {
                             </LinkContainer>
                           )}
                         </td>
-                        <td>{ product.quantity === 0 ? (<div style={{color:'green', fontSize:'15px'}}>Out Of stock!</div>) : product.quantity < 5 ? (<div style={{color:'red', fontSize:'15px'}}>Stock Almost Empty</div>) : (<div style={{color:'green', fontSize:'15px'}}>In Stock</div>)}
+                        <td>{ product.quantity === 0 ? (<div style={{color:'green', fontSize:'15px'}}>Out Of stock!</div>) : product.quantity < 2 ? (<div style={{color:'red', fontSize:'15px'}}>Stock Almost Empty</div>) : (<div style={{color:'green', fontSize:'15px'}}>In Stock</div>)}
                           
                         </td>
                         <td>
