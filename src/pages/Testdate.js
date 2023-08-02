@@ -1,14 +1,21 @@
-// import React from 'react'
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-// import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
+import React from 'react'
 
-// function Testdate() {
-//   return (
-//     <LocalizationProvider dateAdapter={AdapterDayjs}>
-//       <DateCalendar />
-//     </LocalizationProvider>
-//   );
-// }
+function Testdate() {
+  return (
+    <div>
+       <input
+                      type="text"
+                      name="name"
+                      class="form-control"
+                      id="name"
+                      placeholder="Product Name"
+                      // isInvalid={!!errors.name}
+                      isInvalid= {true}
+                      required
+                    
+                    />
+    </div>
+  )
+}
 
-// export default Testdate
+export default Testdate

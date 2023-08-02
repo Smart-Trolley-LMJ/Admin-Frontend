@@ -7,6 +7,9 @@ import { tokens } from "../../theme";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import AddIcon from '@mui/icons-material/Add';
+import InventoryIcon from '@mui/icons-material/Inventory';
 
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
@@ -130,14 +133,14 @@ const Sidebar = () => {
             <Item
               title="Products"
               to="/products"
-              icon={<PeopleOutlinedIcon />}
+              icon={<InventoryIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Add Product"
               to="/addproduct"
-              icon={<ContactsOutlinedIcon />}
+              icon={<AddIcon />}
               selected={selected}
               setSelected={setSelected}
             />

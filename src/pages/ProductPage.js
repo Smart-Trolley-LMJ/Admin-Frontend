@@ -417,6 +417,9 @@ function ProductPage() {
                     <th scope="col">
                       <h5>Weight(g)</h5>
                     </th>
+                    <th scope="col">
+                      <h5>Exp Date</h5>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -581,6 +584,34 @@ function ProductPage() {
                             >
                               <span className="span-caret">
                                 {product.weight}
+                              </span>
+                            </LinkContainer>
+                          )}
+                        </td>
+                        <td>
+                          {" "}
+                          {editing[product.name] ? (
+                            <input
+                              type="date"
+                              name="date"
+                              value={
+                                // editing[product.name]?.weight || product.weight
+                                form.expiry_date
+                              }
+                              onChange={(e) => {
+                                setField("expiry_date", e.target.value);
+                              }}
+
+                              // onChange={(e) =>{
+                              //   setField('weight', e.target.value)
+                              // }}
+                            />
+                          ) : (
+                            <LinkContainer
+                              to={`/products/${product.product_info_id}/details`}
+                            >
+                              <span className="span-caret">
+                                {product.expiry_date}
                               </span>
                             </LinkContainer>
                           )}
