@@ -354,7 +354,7 @@ function AddProduct() {
                         }}
                       >
                         <option>Select a category</option>
-                        <option>Beverages</option>
+                        <option>Food</option>
                         <option>Alcoholic Drinks</option>
 
                         <option>Non-Alcoholic Drinks</option>
