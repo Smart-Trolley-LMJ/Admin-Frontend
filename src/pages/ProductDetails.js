@@ -82,7 +82,7 @@ const ProductDetails = () => {
                     <p> <div className="right__info">
                     <p>
                       Quantity:
-                      <span>{filteredItems.weight}</span>
+                      <span>{filteredItems.quantity}</span>
                     </p>
                   </div></p>
                   <p> <div className="right__info">
