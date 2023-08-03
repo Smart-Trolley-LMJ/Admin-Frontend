@@ -4,10 +4,10 @@ import { Box, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
+// import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
+// import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+// import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AddIcon from '@mui/icons-material/Add';
 import InventoryIcon from '@mui/icons-material/Inventory';
 
